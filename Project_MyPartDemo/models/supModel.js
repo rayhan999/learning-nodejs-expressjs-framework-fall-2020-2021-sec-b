@@ -52,7 +52,7 @@ module.exports ={
     },
     search: function(user, callback){
         var sql = "SELECT username FROM user WHERE username = '"+user.search+"'";
-        console.log(sql);
+
 		db.getResults(sql, function(results){
 			if(results.length > 0){
 				callback(results[0]);

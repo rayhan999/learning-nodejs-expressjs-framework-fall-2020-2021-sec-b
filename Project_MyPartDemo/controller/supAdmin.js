@@ -89,10 +89,10 @@ router.post('/uname',(req,res)=>{
 	var user = {
 		search : req.body.search
     };
-    console.log("ami /uname a ashsii");
+  
 	supModel.search(user, function(results){
 		if(results){
-            console.log(results);
+         
 			res.json({flag:true});
 		}else{
 			res.json({flag:false});
