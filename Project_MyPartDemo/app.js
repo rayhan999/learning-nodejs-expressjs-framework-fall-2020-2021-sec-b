@@ -8,6 +8,7 @@ const login			= require('./controller/login');
 const home			= require('./controller/home');
 const logout		= require('./controller/logout');
 const user			= require('./controller/user');
+const supAdmin		= require('./controller/supAdmin');
 const app 			= express();
 
 app.use(explayouts);
@@ -26,6 +27,7 @@ app.use('/login', login);
 app.use('/home', home);
 app.use('/logout', logout);
 app.use('/user', user);
+app.use('/supAdmin', supAdmin);
 
 //route
 app.get('/', (req, res)=>{
