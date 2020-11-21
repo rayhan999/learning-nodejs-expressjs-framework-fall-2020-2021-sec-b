@@ -24,4 +24,8 @@ router.post('/', (req, res)=>{
 
 })
 
+// router.get('/getstarted', (req, res)=>{
+// 	res.render('login/getstarted')
+// })
+
 module.exports = router;

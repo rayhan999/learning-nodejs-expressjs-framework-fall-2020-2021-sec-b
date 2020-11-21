@@ -35,10 +35,13 @@ module.exports = {
 	execute : function(sql, callback){
 		getConnection(function(connection){
 			connection.query(sql, function (error, status) { 
+				console.log(error);
 				if(status){
 					callback(true);
+					
 				}else{
 					callback(false);
+					console.log('connection !');
 				}
 			});
 

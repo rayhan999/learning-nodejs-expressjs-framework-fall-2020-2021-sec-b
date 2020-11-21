@@ -21,14 +21,14 @@ module.exports ={
 		});
 	},
 	getAll: function(callback){
-		var sql = "select * from user";
+		var sql = "select * from supadmin";
 		db.getResults(sql, function(results){
 			callback(results);
 		});
 
 	},
-	insert: function(user, callback){
-		var sql = "insert into user VALUES ('', '"+user.username+"' , '"+user.password+"' , '"+user.type+"')";
+	insert: function(supAdmin, callback){
+		var sql = "insert into supadmin VALUES ('', '"+supAdmin.name+"' , '"+supAdmin.mobile+"' , '"+supAdmin.email+"', '"+supAdmin.gender+"' , '"+supAdmin.address+"' )";
 		
 		//console.log(sql);
 
