@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const { check, validationResult } = require('express-validator');
 const userModel = require('../../models/userModel');
+const supModel = require('../../models/supModel');
 const { runInNewContext } = require('vm');
 const adminModel = require('../../models/adminModel');
 // const userModel = require.main.require('././models/supModel');
@@ -49,15 +50,17 @@ router.post('/create', (req, res)=> {
 router.get('/edit/:id', (req, res) => {
 
 
-	userModel.getById(req.params.id, function (result) {
+	adminModel.getById(req.params.id, function (result) {
 
 		var user = {
-			username: result.username,
-			password: result.password,
-			type: result.type
+            name:result.Name,
+            mobile:result.Mobile,
+            email:result.Email,
+            gender:result.Gender,
+            address:result.Address
 		};
 
-		res.render('user/edit', user);
+		res.render('admin/edit', user);
 	});
 })
 
@@ -66,16 +69,21 @@ router.post('/edit/:id', (req, res) => {
 
 	var user = {
 		id: req.params.id,
-		username: req.body.username,
-		password: req.body.password,
-		type: req.body.type
+       
+		name: req.body.name,
+	
+		mobile:req.body.mobile,
+		email:req.body.email,
+		gender:req.body.gender,
+        address:req.body.address
+       
 	};
-	userModel.update(user, function (status) {
+	adminModel.update(user, function (status) {
 
 		if (status) {
-			res.redirect('/home/userlist');
+			res.redirect('/supAdmin_home/admin');
 		} else {
-			res.render('user/edit', user);
+			res.render('admin/edit', user);
 		}
 	});
 
@@ -83,24 +91,26 @@ router.post('/edit/:id', (req, res) => {
 })
 
 router.get('/delete/:id', (req, res) => {
-	userModel.getById(req.params.id, function (result) {
+	adminModel.getById(req.params.id, function (result) {
 
 		var user = {
-			username: result.username,
-			password: result.password,
-			type: result.type
+			name:result.Name,
+            mobile:result.Mobile,
+            email:result.Email,
+            gender:result.Gender,
+            address:result.Address
 		};
 
-		res.render('user/delete', user);
+		res.render('admin/delete', user);
 	});
 
 })
 
 router.post('/delete/:id', (req, res) => {
 
-	userModel.delete(req.params.id, function (status) {
+	adminModel.delete(req.params.id, function (status) {
 		if (status) {
-			res.redirect('/home/userlist');
+			res.redirect('/supAdmin_home/admin');
 		}
 	});
 
