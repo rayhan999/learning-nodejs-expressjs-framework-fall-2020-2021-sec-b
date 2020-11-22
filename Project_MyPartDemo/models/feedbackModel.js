@@ -37,7 +37,7 @@ module.exports ={
 		});
 	},
 	update: function(user, callback){
-		var sql = "update user set username='"+user.username+"' , password='"+user.password+"' , type='"+user.type+"' where id = '"+user.id+"'";
+		var sql = "update feedback set isSolved='"+user.isSolved+"'  where id = '"+user.id+"'";
 		db.execute(sql,function(status){
 			callback(status)
 		});

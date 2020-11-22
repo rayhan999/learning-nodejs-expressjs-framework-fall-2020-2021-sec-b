@@ -49,5 +49,16 @@ module.exports ={
 		db.execute(sql,function(status){
 			callback(status);
 		});
+	},
+	search: function(user, callback){
+        var sql = "SELECT Manager_Name FROM subscriber WHERE Manager_Name = '"+user.search+"'";
+		console.log(sql);
+		db.getResults(sql, function(results){
+			if(results.length > 0){
+				callback(results[0]);
+			}else{
+				callback(false);
+			}
+		});
 	}
 }

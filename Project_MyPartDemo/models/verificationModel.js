@@ -51,7 +51,7 @@ module.exports ={
 		});
     },
     search: function(user, callback){
-        var sql = "SELECT username FROM user WHERE username = '"+user.search+"'";
+        var sql = "SELECT username FROM verifiysubscriber WHERE username = '"+user.search+"'";
 
 		db.getResults(sql, function(results){
 			if(results.length > 0){

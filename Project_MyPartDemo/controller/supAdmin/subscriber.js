@@ -5,6 +5,7 @@ const userModel = require('../../models/userModel');
 const supModel = require('../../models/supModel');
 const { runInNewContext } = require('vm');
 const adminModel = require('../../models/adminModel');
+const subscriberModel = require('../../models/subscriberModel');
 // const userModel = require.main.require('././models/supModel');
 const router = express.Router();
 const app 			= express();
@@ -115,7 +116,20 @@ router.post('/delete/:id', (req, res) => {
 	});
 
 })
+router.post('/uname', (req, res) => {
+	var user = {
+		search: req.body.search
+	};
 
+	subscriberModel.search(user, function (results) {
+		if (results) {
+
+			res.json({ flag: false });
+		} else {
+			res.json({ flag: true });
+		}
+	});
+});
 
 module.exports = router;
 

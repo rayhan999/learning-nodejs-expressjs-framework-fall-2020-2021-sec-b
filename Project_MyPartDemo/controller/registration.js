@@ -25,7 +25,7 @@ router.post('/', (req, res)=>{
 		
 		if (status) {
 			
-			res.redirect('/');
+			res.redirect('/login/register');
 		} else {
 			
 			res.render('login/getstarted');

@@ -149,7 +149,20 @@ router.post('/verify/:id', (req, res) => {
 
 })
 
+router.post('/uname', (req, res) => {
+	var user = {
+		search: req.body.search
+	};
 
+	verificationModel.search(user, function (results) {
+		if (results) {
+
+			res.json({ flag: true });
+		} else {
+			res.json({ flag: false });
+		}
+	});
+});
 
 module.exports = router;
 

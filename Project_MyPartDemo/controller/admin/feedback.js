@@ -12,36 +12,38 @@ const urlencodedparser = bodyParser.urlencoded({ extended: false });
 
 
 
-router.get('/edit/:id', (req, res) => {
+router.get('/solved/:id', (req, res) => {
 
 
-	userModel.getById(req.params.id, function (result) {
+	feedbackModel.getById(req.params.id, function (result) {
 
 		var user = {
-			username: result.username,
-			password: result.password,
-			type: result.type
+            username:result.username,
+            comment:result.comment,
+            date:result.date,
+            isSolved:result.isSolved
 		};
 
-		res.render('user/edit', user);
+		res.render('feedback/solved', user);
 	});
 })
 
 
-router.post('/edit/:id', (req, res) => {
+router.post('/solved/:id', (req, res) => {
 
 	var user = {
-		id: req.params.id,
-		username: req.body.username,
-		password: req.body.password,
-		type: req.body.type
+        id: req.params.id,
+        username:req.body.username,
+        comment:req.body.comment,
+        date:req.body.date,
+		isSolved:req.body.isSolved
 	};
-	userModel.update(user, function (status) {
+	feedbackModel.update(user, function (status) {
 
 		if (status) {
-			res.redirect('/home/userlist');
+			res.redirect('/admin_home/feedbacks');
 		} else {
-			res.render('user/edit', user);
+			res.render('feedback/solved', user);
 		}
 	});
 
