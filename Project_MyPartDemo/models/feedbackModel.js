@@ -4,29 +4,16 @@ module.exports ={
 
 	validate: function(user, callback){
 		var sql = "select * from user where username='"+user.username+"' and password='"+user.password+"'";
-		console.log(sql);
 		db.getResults(sql, function(results){
 			if(results.length > 0){
-				// callback(true);
-			//	console.log("validate hoise");
-				callback(results[0]);
-				//console.log(results[0]);
+				callback(true);
+			}else{
+				callback(false);
 			}
 		});
 	},
-
-	// validate: function(user, callback){
-	// 	var sql = "select * from user where username='"+user.username+"' and password='"+user.password+"'";
-	// 	db.getResults(sql, function(results){
-	// 		if(results.length > 0){
-	// 			callback(true);
-	// 		}else{
-	// 			callback(false);
-	// 		}
-	// 	});
-	// },
 	getById: function(id, callback){
-		var sql = "select * from user where id='"+id+"'";
+		var sql = "select * from feedback where id='"+id+"'";
 		db.getResults(sql, function(results){
 			if(results.length >0 ){
 				callback(results[0]);
@@ -34,22 +21,14 @@ module.exports ={
 		});
 	},
 	getAll: function(callback){
-		var sql = "select * from user";
+		var sql = "select * from feedback";
 		db.getResults(sql, function(results){
 			callback(results);
 		});
 
 	},
-	getById: function(id, callback){
-		var sql = "select * from user where id='"+id+"'";
-		db.getResults(sql, function(results){
-			if(results.length >0 ){
-				callback(results[0]);
-			}
-		});
-	},
 	insert: function(user, callback){
-		var sql = "insert into user VALUES ('', '"+user.username+"' , '"+user.password+"' , '"+user.type+"')";
+		var sql = "insert into subscriber VALUES ('', '"+user.type+"' , '"+user.cname+"' , '"+user.cemail+"' , '"+user.cmobile+"', '"+user.caddress+"', '"+user.cmname+"'  )";
 		
 		//console.log(sql);
 
@@ -65,7 +44,7 @@ module.exports ={
 
 	},
 	delete: function(id, callback){
-		var sql = "DELETE FROM user WHERE id = '"+id+"'";
+		var sql = "DELETE FROM feedback WHERE id = '"+id+"'";
 		console.log(sql);
 		db.execute(sql,function(status){
 			callback(status);

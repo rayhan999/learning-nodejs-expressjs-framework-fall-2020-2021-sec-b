@@ -3,8 +3,13 @@ var feature 	= require('../../assets/json/packagefeature.json');
 const adminModel = require('../../models/adminModel');
 const supModel = require('../../models/supModel');
 const verifyModel = require('../../models/verifyModel');
+const subscriberModel = require('../../models/subscriberModel');
+const feedbackModel = require('../../models/feedbackModel');
+const noticeModel = require('../../models/noticeModel');
+
 // const userModel = require.main.require('../../models/verifyModel');
 const router 	= express.Router();
+
 
 router.get('/', (req, res)=>{
 	
@@ -13,47 +18,68 @@ router.get('/', (req, res)=>{
 	// }else{
 	// 	res.redirect('/login');
 	// }
-	res.render('supAdmin_home/index');
+	console.log(req.cookies['uname']);
+	var uname = req.cookies['uname'];
+	console.log(uname);
+	res.render('supAdmin_home/index',{uname});
 })
 
 
 router.get('/subscriber', (req, res)=>{
-	res.render('supAdmin_home/subscriber'); 
+	
+	subscriberModel.getAll(function(results){
+		var uname = req.cookies['uname'];
+		res.render('supAdmin_home/subscriber',{ userlist:results , uname}); 
+	});
 })
 
 router.get('/supAdmin', (req, res)=>{
 	// res.render('supAdmin_home/supAdmin'); 
 	supModel.getAll(function(results){
-		res.render('supAdmin_home/supAdmin', {userlist: results});
+		var uname = req.cookies['uname'];
+		res.render('supAdmin_home/supAdmin', {userlist: results, uname});
 	});
 })
 router.get('/admin', (req, res)=>{
 	
 	adminModel.getAll(function(results){
-		res.render('supAdmin_home/admin', {userlist: results});
+		var uname = req.cookies['uname'];
+		res.render('supAdmin_home/admin', {userlist: results, uname});
 	}); 
 })
 
 router.get('/feedbacks', (req, res)=>{
-	res.render('supAdmin_home/feedbacks'); 
+	
+	feedbackModel.getAll(function(results){
+		var uname = req.cookies['uname'];
+		res.render('supAdmin_home/feedbacks', {userlist: results, uname});
+	});
 })
 router.get('/verification', (req, res)=>{
 	verifyModel.getAll(function(results){
-		res.render('supAdmin_home/verification', {userlist: results});
+		var uname = req.cookies['uname'];
+		res.render('supAdmin_home/verification', {userlist: results, uname});
 	});
 })
 router.get('/package', (req, res)=>{
+	var uname = req.cookies['uname'];
 	res.render('supAdmin_home/package',
 	{featurelist : feature}
 	); 
 })
 router.get('/meeting', (req, res)=>{
-	res.render('supAdmin_home/meeting'); 
+
+	noticeModel.getMeeting(function(results){
+		var uname = req.cookies['uname'];
+		res.render('supAdmin_home/meeting', {userlist: results, uname});
+	});
 })
 router.get('/template', (req, res)=>{
+	var uname = req.cookies['uname'];
 	res.render('supAdmin_home/template'); 
 })
 router.get('/financial', (req, res)=>{
+	var uname = req.cookies['uname'];
 	res.render('supAdmin_home/financialstatus'); 
 })
 

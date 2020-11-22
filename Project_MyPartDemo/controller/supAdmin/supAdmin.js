@@ -129,7 +129,17 @@ router.post('/delete/:id', (req, res) => {
 
 	userModel.delete(req.params.id, function (status) {
 		if (status) {
-			res.redirect('/home/userlist');
+		
+			userModel.delete(req.params.id, function (status) {
+                if (status) {
+					res.redirect('/home/userlist');
+                } else {
+                    res.render('supAdmin/delete');
+                }
+            });
+		}else {
+			res.render('supAdmin/delete');
+		
 		}
 	});
 

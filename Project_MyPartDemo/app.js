@@ -12,6 +12,9 @@ const logout		= require('./controller/logout');
 const user			= require('./controller/user');
 const supAdmin		= require('./controller/supAdmin/supAdmin');
 const admin		= require('./controller/supAdmin/admin');
+const feedback		= require('./controller/supAdmin/feedback');
+const verification		= require('./controller/supAdmin/verification');
+const meeting		= require('./controller/supAdmin/meeting');
 const registration	= require('./controller/registration');
 const app 			= express();
 
@@ -38,6 +41,9 @@ app.use('/logout', logout);
 app.use('/user', user);
 app.use('/supAdmin', supAdmin);
 app.use('/admin', admin);
+app.use('/verification', verification);
+app.use('/feedback', feedback);
+app.use('/meeting', meeting);
 app.use('/getstarted',registration);
 
 //route

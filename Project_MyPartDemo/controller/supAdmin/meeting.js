@@ -4,14 +4,14 @@ const { check, validationResult } = require('express-validator');
 const userModel = require('../../models/userModel');
 const supModel = require('../../models/supModel');
 const { runInNewContext } = require('vm');
-const adminModel = require('../../models/adminModel');
+const noticeModel = require('../../models/noticeModel');
 // const userModel = require.main.require('././models/supModel');
 const router = express.Router();
 const app 			= express();
 const urlencodedparser = bodyParser.urlencoded({ extended: false });
 
 router.get('/create', (req, res) => {
-	res.render('admin/create');
+	res.render('meeting/create');
 })
 
 
@@ -19,29 +19,22 @@ router.get('/create', (req, res) => {
 
 router.post('/create', (req, res)=> {
 	var user = {
-		username: req.body.username,
-		name: req.body.name,
-		type:req.body.type,
-		mobile:req.body.mobile,
-		email:req.body.email,
-		gender:req.body.gender,
-        address:req.body.address,
-        password:req.body.password
+        title:req.body.title,
+        concerned_to:req.body.concerned_to,
+        date:req.body.date,
+        details:req.body.details
 
 
 	};
 
-	adminModel.insert(user, function (status) {
+	noticeModel.insert(user, function (status) {
 		if (status) {
-            userModel.insert(user, function (status) {
-                if (status) {
-                    res.redirect('/supAdmin_home/admin');
-                } else {
-                    res.render('admin/create');
-                }
-            });
+           
+                    res.redirect('/supAdmin_home/meeting');
+                
+            
 		} else {
-			res.render('admin/create');
+			res.render('meeting/create');
 		}
     });
    

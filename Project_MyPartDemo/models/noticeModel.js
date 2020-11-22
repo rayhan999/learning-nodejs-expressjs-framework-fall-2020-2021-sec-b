@@ -13,7 +13,7 @@ module.exports ={
 		});
 	},
 	getById: function(id, callback){
-		var sql = "select * from verifysubscriber where id='"+id+"'";
+		var sql = "select * from admin where id='"+id+"'";
 		db.getResults(sql, function(results){
 			if(results.length >0 ){
 				callback(results[0]);
@@ -21,14 +21,21 @@ module.exports ={
 		});
 	},
 	getAll: function(callback){
-		var sql = "select * from verifysubscriber";
+		var sql = "select * from notice";
+		db.getResults(sql, function(results){
+			callback(results);
+		});
+
+    },
+    getMeeting: function(callback){
+		var sql = "select * from notice where title='Meeting'";
 		db.getResults(sql, function(results){
 			callback(results);
 		});
 
 	},
 	insert: function(user, callback){
-		var sql = "insert into verifiysubscriber VALUES ('', '"+user.type+"' , '"+user.cname+"' , '"+user.cemail+"' , '"+user.cmobile+"', '"+user.cemployee+"' , '"+user.caddress+"', '"+user.cmname+"'  )";
+		var sql = "insert into notice VALUES ('',  '"+user.title+"' , '"+user.details+"' , '"+user.concerned_to+"', '"+user.date+"' )";
 		
 		//console.log(sql);
 
@@ -37,14 +44,14 @@ module.exports ={
 		});
 	},
 	update: function(user, callback){
-		var sql = "update user set username='"+user.username+"' , password='"+user.password+"' , type='"+user.type+"' where id = '"+user.id+"'";
+		var sql = "update admin set Name='"+user.name+"' , Mobile='"+user.mobile+"' , Email='"+user.email+"',Gender='"+user.gender+"' ,Address='"+user.address+"'  where id = '"+user.id+"'";
 		db.execute(sql,function(status){
 			callback(status)
 		});
 
 	},
 	delete: function(id, callback){
-		var sql = "DELETE FROM user WHERE id = '"+id+"'";
+		var sql = "DELETE FROM admin WHERE id = '"+id+"'";
 		console.log(sql);
 		db.execute(sql,function(status){
 			callback(status);
