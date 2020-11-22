@@ -1,5 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+var fs = require('fs');
+var pdf = require('html-pdf');
+var html = fs.readFileSync('././views/supAdmin_home/invoice.ejs', 'utf8');
+var options = { format: 'A4' };
+
+
 const { check, validationResult } = require('express-validator');
 const userModel = require('../../models/userModel');
 const subscriberModel = require('../../models/subscriberModel');
@@ -7,7 +13,7 @@ const { runInNewContext } = require('vm');
 const verificationModel = require('../../models/verificationModel');
 // const userModel = require.main.require('././models/supModel');
 const router = express.Router();
-const app 			= express();
+const app = express();
 const urlencodedparser = bodyParser.urlencoded({ extended: false });
 
 // router.get('/verify', (req, res) => {
@@ -43,7 +49,7 @@ const urlencodedparser = bodyParser.urlencoded({ extended: false });
 // 			res.render('admin/create');
 // 		}
 //     });
-   
+
 // })
 
 router.get('/edit/:id', (req, res) => {
@@ -52,11 +58,11 @@ router.get('/edit/:id', (req, res) => {
 	adminModel.getById(req.params.id, function (result) {
 
 		var user = {
-            name:result.Name,
-            mobile:result.Mobile,
-            email:result.Email,
-            gender:result.Gender,
-            address:result.Address
+			name: result.Name,
+			mobile: result.Mobile,
+			email: result.Email,
+			gender: result.Gender,
+			address: result.Address
 		};
 
 		res.render('admin/edit', user);
@@ -68,14 +74,14 @@ router.post('/edit/:id', (req, res) => {
 
 	var user = {
 		id: req.params.id,
-       
+
 		name: req.body.name,
-	
-		mobile:req.body.mobile,
-		email:req.body.email,
-		gender:req.body.gender,
-        address:req.body.address
-       
+
+		mobile: req.body.mobile,
+		email: req.body.email,
+		gender: req.body.gender,
+		address: req.body.address
+
 	};
 	adminModel.update(user, function (status) {
 
@@ -93,17 +99,18 @@ router.get('/verify/:id', (req, res) => {
 	verificationModel.getById(req.params.id, function (result) {
 
 		var user = {
-            type: result.Subscription_Type,
-            cname :result.Company_Name,
-            cemail:result.Company_Email,
-            cmobile:result.Contact_No,
-            
-            caddress:result.Company_Address,
-            cmname:	result.Manager_Name
-        	};
+			type: result.Subscription_Type,
+			cname: result.Company_Name,
+			cemail: result.Company_Email,
+			cmobile: result.Contact_No,
+
+			caddress: result.Company_Address,
+			cmname: result.Manager_Name
+		};
 
 		res.render('verification/verify', user);
 	});
+
 
 })
 
@@ -113,39 +120,51 @@ router.post('/verify/:id', (req, res) => {
 		if (status) {
 			// // res.redirect('/supAdmin_home/admin');
 			// userModel.delete(req.params.id, function (status) {
-            //     if (status) {
+			//     if (status) {
 			// 		res.redirect('/supAdmin_home/admin');
-            //     } else {
-            //         res.render('admin/delete');
-            //     }
-            // });
+			//     } else {
+			//         res.render('admin/delete');
+			//     }
+			// });
 
-            var user = {
-                		type:req.body.type,
-                		cname : req.body.cname,
-                		cemail:req.body.cemail,
-                		cmobile:req.body.cmobile,
-                		
-                		caddress:req.body.caddress,
-                		cmname:req.body.cmname
-                
-                
-                	};
-                
-                	
-                    subscriberModel.insert(user, function (status) {
-                                if (status) {
-                                    res.redirect('/supAdmin_home/verification');
-                                } else {
-                                    res.render('verification/verify');
-                                }
-                            });
-                		
-                   
-		}else {
+			var user = {
+				type: req.body.type,
+				cname: req.body.cname,
+				cemail: req.body.cemail,
+				cmobile: req.body.cmobile,
+
+				caddress: req.body.caddress,
+				cmname: req.body.cmname
+
+
+			};
+
+
+			subscriberModel.insert(user, function (status) {
+				if (status) {
+					pdf.create(html, options).toFile('assets/uploads/invoice.pdf', function (err, result) {
+						if (err) { return console.log(err); }
+						else {
+							console.log(res); // { filename: '/app/businesscard.pdf' } 
+							// var datafile = fs.readFileSync('assets/uploads/invoice.pdf');
+							// res.header('content-type', 'application/pdf');
+							// res.send(datafile);
+						}
+					});
+					res.redirect('/supAdmin_home/verification');
+				} else {
+					res.render('verification/verify');
+				}
+			});
+
+
+		} else {
 			res.render('verification/verify');
 		}
 	});
+	
+	
+
 
 })
 

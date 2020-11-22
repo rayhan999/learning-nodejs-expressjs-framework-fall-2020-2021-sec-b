@@ -14,9 +14,11 @@
     "express-session": "^1.17.1",
     "express-validator": "^6.6.1",
     "fs": "0.0.1-security",
+    "html-pdf": "^2.2.0",
     "mysql": "^2.18.1",
     "node": "^15.2.0",
-    "pdfkit": "^0.11.0"
+    "pdfkit": "^0.11.0",
+    "phantom": "^6.3.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.6"
