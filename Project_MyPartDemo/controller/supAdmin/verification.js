@@ -114,18 +114,26 @@ router.get('/verify/:id', (req, res) => {
 
 })
 
-router.post('/verify/:id', (req, res) => {
+router.post('/verify/:id', [
+	check('type', 'Type must be at least 2 character').exists().isLength({min:2}),
+	check('cname', 'company name name must be at least 3 character').exists().isLength({min:3}),
+	check('cmobile', 'mobile must be at least 4 character').exists().isLength({min:4}),
+	check('cmname', 'Manager Name must be at least 4 character').exists().isLength({min:4}),
+	check('caddress', 'address must be at least 5 character').exists().isLength({min:5}),
+	check('cemail', 'Email is not valid').isEmail().normalizeEmail()
+
+], (req, res) => {
+	const errors = validationResult(req);
+	if (!errors.isEmpty()) {
+		console.log(errors.array());
+		const alerts = errors.array();
+		
+		res.render('supAdmin/create',{alerts})
+	} else {
 
 	verificationModel.delete(req.params.id, function (status) {
 		if (status) {
-			// // res.redirect('/supAdmin_home/admin');
-			// userModel.delete(req.params.id, function (status) {
-			//     if (status) {
-			// 		res.redirect('/supAdmin_home/admin');
-			//     } else {
-			//         res.render('admin/delete');
-			//     }
-			// });
+			
 
 			var user = {
 				type: req.body.type,
@@ -142,7 +150,7 @@ router.post('/verify/:id', (req, res) => {
 
 			subscriberModel.insert(user, function (status) {
 				if (status) {
-					pdf.create(html, options).toFile('assets/uploads/invoice.pdf', function (err, result) {
+					pdf.create(html, options).toFile('assets/uploads/invoice.pdf', function (err, res) {
 						if (err) { return console.log(err); }
 						else {
 							console.log(res); // { filename: '/app/businesscard.pdf' } 
@@ -163,7 +171,7 @@ router.post('/verify/:id', (req, res) => {
 		}
 	});
 	
-	
+}
 
 
 })

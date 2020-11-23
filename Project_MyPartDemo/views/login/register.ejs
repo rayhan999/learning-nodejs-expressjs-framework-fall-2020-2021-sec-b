@@ -15,6 +15,7 @@
         </div>
 	</div>
 </div>
+
 <div class="login-wrap d-flex align-items-center flex-wrap justify-content-center">
 	<div class="container">
 		<div class="row align-items-center">
@@ -28,6 +29,18 @@
 					<div class="login-title">
 						<h2 class="text-center text-primary">Registration To DeskApp</h2>
 					</div>
+					<% if(typeof alerts != 'undefined'){ %>
+						<% alerts.forEach(function (error) {%>
+			
+			
+							<div class="alert alert-warning alert-dismissible fade show" role="alert">
+								<%= error.msg %>
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+						<% }) %>
+						<% } %>
 					<form method="POST">
 						<div class="input-group custom">
 							<input type="text" class="form-control form-control-lg" value="Manager" name="type" readonly>

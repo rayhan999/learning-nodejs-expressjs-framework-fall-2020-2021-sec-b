@@ -6,73 +6,60 @@ const { runInNewContext } = require('vm');
 const userModel = require('../../models/userModel');
 // const userModel = require.main.require('././models/supModel');
 const router = express.Router();
-const app 			= express();
+const app = express();
 const urlencodedparser = bodyParser.urlencoded({ extended: false });
 
 router.get('/create', (req, res) => {
 	res.render('supAdmin/create');
 })
 
-// router.post('/create',urlencodedparser , [
-// 	check('username' , 'Username is empty')
-// 	.exists(),
-// 	check('email','Email is not valid')
-// 	.isEmail()
-// 	.normalizeEmail()
-// ],(req, res)=>{
-
-// 	const error = validationResult(res)
-// 	if(!error.isEmpty()){
-// 		console.log('error ase');
-// 		const alert = error.array()
-// 		res.render('supAdmin/create' , {
-// 			alert
-// 		})
-// 	}
-
-// 	// var user = {
-// 	// 	username: 	req.body.username,
 
 
-// 	// };
+router.post('/create', [
+	check('name', 'Name must be at least 4 character').exists().isLength({min:4}),
+	check('username', 'Username name must be at least 3 character').exists().isLength({min:3}),
+	check('mobile', 'mobile must be at least 4 character').exists().isLength({min:4}),
+	check('gender', 'gender must be at least 4 character').exists().isLength({min:4}),
+	check('address', 'address must be at least 5 character').exists().isLength({min:5}),
+	check('email', 'Email is not valid').isEmail().normalizeEmail()
 
-// 	// supModel.insert(user, function(status){
-// 	// 	if(status){
-// 	// 		res.redirect('/home/userlist');
-// 	// 	}else{
-// 	// 		res.redirect('user/create');
-// 	// 	}
-// 	// });
-// })
+], (req, res) => {
+	const errors = validationResult(req);
+	if (!errors.isEmpty()) {
+		console.log(errors.array());
+		const alerts = errors.array();
+		
+		res.render('supAdmin/create',{alerts})
+	} else {
 
-router.post('/create', (req, res)=> {
-	var supAdmin = {
-		username: req.body.username,
-		name: req.body.name,
-		type:req.body.type,
-		mobile:req.body.mobile,
-		email:req.body.email,
-		gender:req.body.gender,
-		address:req.body.address,
-        password:req.body.password
+		var supAdmin = {
+			username: req.body.username,
+			name: req.body.name,
+			type: req.body.type,
+			mobile: req.body.mobile,
+			email: req.body.email,
+			gender: req.body.gender,
+			address: req.body.address,
+			password: req.body.password
 
 
-	};
+		};
 
-	supModel.insert(supAdmin, function (status) {
-		if (status) {
-			userModel.insert(supAdmin, function (status) {
-				if (status) {
-					res.redirect('/supAdmin_home/supAdmin');
-				} else {
-					res.render('supAdmin/create');
-				}
-			});
-		} else {
-			res.render('supAdmin/create');
-		}
-	});
-	
+		supModel.insert(supAdmin, function (status) {
+			if (status) {
+				userModel.insert(supAdmin, function (status) {
+					if (status) {
+						res.redirect('/supAdmin_home/supAdmin');
+					} else {
+						res.render('supAdmin/create');
+					}
+				});
+			} else {
+				res.render('supAdmin/create');
+			}
+		});
+	}
+
 })
 
 router.get('/edit/:id', (req, res) => {
@@ -129,17 +116,17 @@ router.post('/delete/:id', (req, res) => {
 
 	userModel.delete(req.params.id, function (status) {
 		if (status) {
-		
+
 			userModel.delete(req.params.id, function (status) {
-                if (status) {
+				if (status) {
 					res.redirect('/home/userlist');
-                } else {
-                    res.render('supAdmin/delete');
-                }
-            });
-		}else {
+				} else {
+					res.render('supAdmin/delete');
+				}
+			});
+		} else {
 			res.render('supAdmin/delete');
-		
+
 		}
 	});
 

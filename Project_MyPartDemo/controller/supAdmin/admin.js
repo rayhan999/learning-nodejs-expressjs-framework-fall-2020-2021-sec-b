@@ -17,7 +17,22 @@ router.get('/create', (req, res) => {
 
 // })
 
-router.post('/create', (req, res)=> {
+router.post('/create', [
+	check('name', 'Name must be at least 4 character').exists().isLength({min:4}),
+	check('username', 'Username name must be at least 3 character').exists().isLength({min:3}),
+	check('mobile', 'mobile must be at least 4 character').exists().isLength({min:4}),
+	check('gender', 'gender must be at least 4 character').exists().isLength({min:4}),
+	check('address', 'address must be at least 5 character').exists().isLength({min:5}),
+	check('email', 'Email is not valid').isEmail().normalizeEmail()
+
+], (req, res)=> {
+	const errors = validationResult(req);
+	if (!errors.isEmpty()) {
+		console.log(errors.array());
+		const alerts = errors.array();
+		
+		res.render('supAdmin/create',{alerts})
+	} else {
 	var user = {
 		username: req.body.username,
 		name: req.body.name,
@@ -44,7 +59,7 @@ router.post('/create', (req, res)=> {
 			res.render('admin/create');
 		}
     });
-   
+}
 })
 
 router.get('/edit/:id', (req, res) => {
@@ -65,7 +80,22 @@ router.get('/edit/:id', (req, res) => {
 })
 
 
-router.post('/edit/:id', (req, res) => {
+router.post('/edit/:id', [
+	check('name', 'Name must be at least 4 character').exists().isLength({min:4}),
+	check('username', 'Username name must be at least 3 character').exists().isLength({min:3}),
+	check('mobile', 'mobile must be at least 4 character').exists().isLength({min:4}),
+	check('gender', 'gender must be at least 4 character').exists().isLength({min:4}),
+	check('address', 'address must be at least 5 character').exists().isLength({min:5}),
+	check('email', 'Email is not valid').isEmail().normalizeEmail()
+
+], (req, res)=> {
+	const errors = validationResult(req);
+	if (!errors.isEmpty()) {
+		console.log(errors.array());
+		const alerts = errors.array();
+		
+		res.render('supAdmin/create',{alerts})
+	} else {
 
 	var user = {
 		id: req.params.id,
@@ -87,7 +117,7 @@ router.post('/edit/:id', (req, res) => {
 		}
 	});
 
-	// res.redirect('/home/userlist');
+}// res.redirect('/home/userlist');
 })
 
 router.get('/delete/:id', (req, res) => {

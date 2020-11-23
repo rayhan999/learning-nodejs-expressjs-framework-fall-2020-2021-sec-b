@@ -1,38 +1,4 @@
-<!-- <!DOCTYPE html>
-<html>
-<head>
-	<title>Create User</title>
-</head>
-<body>
-	<form method="post">
-		<fieldset>
-			<legend>Create User</legend>
-			<table>
-				<tr>
-					<td>Username</td>
-					<td><input type="text" name="username"></td>
-				</tr>
-				<tr>
-					<td>Password</td>
-					<td><input type="password" name="password"></td>
-				</tr>
-				<tr>
-					<td>Type</td>
-					<td><input type="text" name="type"></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td><input type="submit" name="submit" value="Create"></td>
-				</tr>
-			</table>
-		</fieldset>
-	</form>
-</body>
-</html> -->
-<!-- <%- include('../partials/preloader.ejs')%> -->
-<%- include('../partials/navbar.ejs')%>
-<%- include('../partials/sidebar_right.ejs')%>
-<%- include('../partials/supAdmin_sidebar')%>
+
 
 
 <div class="main-container">
@@ -123,8 +89,8 @@
 					</form>
 				</div>
 			</div> -->
-			<% if(typeof alert != 'undefined'){ %>
-			<% alert.forEach(function (error) {%>
+			<% if(typeof alerts != 'undefined'){ %>
+			<% alerts.forEach(function (error) {%>
 
 
 				<div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -151,8 +117,8 @@
 					</div>
 					<% const result = Math.random().toString(36).substring(2,7); %>
 					<div class="form-group">
-						<label>UserType</label>
-						<input class="form-control" type="text" value="<%= result %>" name="type" readonly>
+						<label>Password</label>
+						<input class="form-control" type="text" value="<%= result %>" name="password" readonly>
 					</div>
 					<div class="form-group">
 						<label>Name</label>
@@ -186,13 +152,13 @@
 						<label>Address</label>
 						<textarea class="form-control" name="address"></textarea>
 					</div>
-					<div class="form-group">
+					<!-- <div class="form-group">
 						<label>Image</label>
 						<div class="custom-file">
 							<input type="file" class="custom-file-input" name="image">
 							<label class="custom-file-label">Choose file</label>
 						</div>
-					</div>
+					</div> -->
 					<div class="col-md-12 col-sm-12 mb-30">
 
 						<div class="pd-20 card-box height-100-p">

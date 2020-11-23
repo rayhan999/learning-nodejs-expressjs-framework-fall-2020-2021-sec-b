@@ -11,6 +11,14 @@ const noticeModel = require('../../models/noticeModel');
 const router 	= express.Router();
 
 
+router.get('*',  (req, res, next)=>{
+	if(req.cookies['uname'] == null){
+		res.redirect('/login');
+	}else{
+		next();
+	}
+});
+
 router.get('/', (req, res)=>{
 	
 	// if(req.cookies['uname'] != null){
@@ -64,7 +72,7 @@ router.get('/verification', (req, res)=>{
 router.get('/package', (req, res)=>{
 	var uname = req.cookies['uname'];
 	res.render('supAdmin_home/package',
-	{featurelist : feature}
+	{featurelist : feature , uname}
 	); 
 })
 router.get('/meeting', (req, res)=>{

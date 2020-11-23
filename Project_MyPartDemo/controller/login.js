@@ -1,5 +1,6 @@
 const express = require('express');
-const { Result } = require('express-validator');
+
+const { check, validationResult } = require('express-validator');
 const userModel = require.main.require('./models/userModel');
 const router = express.Router();
 
@@ -42,30 +43,23 @@ router.post('/', (req, res) => {
 
 })
 
-router.post('/', (req, res) => {
 
-	var user = {
-		username: req.body.username,
-		password: req.body.password
-	};
-
-	userModel.validate(user, function (status) {
-		if (status) {
-			req.session.uname = req.body.username;
-			//	res.cookie('uname', req.body.username);
-			res.redirect('/home');
-		} else {
-			res.redirect('/login');
-		}
-	});
-
-})
 router.get('/register', (req, res) => {
 	res.render('login/register')
 })
 
-router.post('/register', (req, res) => {
-	//res.render('login/register')
+router.post('/register', [
+	check('cmname', 'Name must be at least 4 character').exists().isLength({min:4}),
+	check('username', 'Username name must be at least 3 character').exists().isLength({min:3}).isAlpha(),
+	check('password', 'mobile must be at least 4 character').exists().isLength({min:4})
+],(req, res) => {
+	const errors = validationResult(req);
+	if (!errors.isEmpty()) {
+		console.log(errors.array());
+		const alerts = errors.array();
+		
+		res.render('login/register',{alerts})
+	} else {
 	var user = {
 		username: req.body.username,
 		password: req.body.password,
@@ -81,6 +75,7 @@ router.post('/register', (req, res) => {
 			res.redirect('/login/register');
 		}
 	});
+}
 })
 
 

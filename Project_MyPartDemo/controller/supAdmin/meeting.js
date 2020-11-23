@@ -17,7 +17,19 @@ router.get('/create', (req, res) => {
 
 // })
 
-router.post('/create', (req, res)=> {
+router.post('/create', [
+	check('title', 'Title must be at least 2 character').exists().isLength({min:2}),
+	check('details', 'Details name must be at least 10 character').exists().isLength({min:10}),
+	
+
+], (req, res) => {
+	const errors = validationResult(req);
+	if (!errors.isEmpty()) {
+		console.log(errors.array());
+		const alerts = errors.array();
+		
+		res.render('supAdmin/create',{alerts})
+	} else {
 	var user = {
         title:req.body.title,
         concerned_to:req.body.concerned_to,
@@ -37,7 +49,7 @@ router.post('/create', (req, res)=> {
 			res.render('meeting/create');
 		}
     });
-   
+}
 })
 
 router.get('/edit/:id', (req, res) => {
