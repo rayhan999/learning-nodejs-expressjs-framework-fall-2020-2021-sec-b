@@ -27,10 +27,10 @@ module.exports ={
 		});
 
 	},
-	insert: function(supAdmin, callback){
-		var sql = "insert into supadmin VALUES ('', '"+supAdmin.name+"' , '"+supAdmin.mobile+"' , '"+supAdmin.email+"', '"+supAdmin.gender+"' , '"+supAdmin.address+"' )";
+	insert: function(supAdmin,image, callback){
+		var sql = "insert into supadmin VALUES ('', '"+supAdmin.name+"' , '"+supAdmin.mobile+"' , '"+supAdmin.email+"', '"+supAdmin.gender+"' , '"+supAdmin.address+"', '"+image+"'  )";
 		
-		//console.log(sql);
+		console.log(sql);
 
 		db.execute(sql, function(status){
 			callback(status);

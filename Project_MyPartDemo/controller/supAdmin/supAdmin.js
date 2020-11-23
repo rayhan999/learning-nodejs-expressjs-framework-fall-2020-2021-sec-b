@@ -16,11 +16,11 @@ router.get('/create', (req, res) => {
 
 
 router.post('/create', [
-	check('name', 'Name must be at least 4 character').exists().isLength({min:4}),
-	check('username', 'Username name must be at least 3 character').exists().isLength({min:3}),
-	check('mobile', 'mobile must be at least 4 character').exists().isLength({min:4}),
-	check('gender', 'gender must be at least 4 character').exists().isLength({min:4}),
-	check('address', 'address must be at least 5 character').exists().isLength({min:5}),
+	check('name', 'Name must be at least 4 character').exists().isLength({ min: 4 }),
+	check('username', 'Username name must be at least 3 character').exists().isLength({ min: 3 }),
+	check('mobile', 'mobile must be at least 4 character').exists().isLength({ min: 4 }),
+	check('gender', 'gender must be at least 4 character').exists().isLength({ min: 4 }),
+	check('address', 'address must be at least 5 character').exists().isLength({ min: 5 }),
 	check('email', 'Email is not valid').isEmail().normalizeEmail()
 
 ], (req, res) => {
@@ -28,10 +28,10 @@ router.post('/create', [
 	if (!errors.isEmpty()) {
 		console.log(errors.array());
 		const alerts = errors.array();
-		
-		res.render('supAdmin/create',{alerts})
-	} else {
 
+		res.render('supAdmin/create', { alerts })
+	} else {
+		console.log("supadmin e dhuksi");
 		var supAdmin = {
 			username: req.body.username,
 			name: req.body.name,
@@ -40,12 +40,29 @@ router.post('/create', [
 			email: req.body.email,
 			gender: req.body.gender,
 			address: req.body.address,
-			password: req.body.password
-
+			password: req.body.password,
+			file: req.files.image,
+			
 
 		};
+		var file = req.files.image;
+		var image= file.name;
 
-		supModel.insert(supAdmin, function (status) {
+		console.log(file.mimetype);
+		if (file.mimetype == 'image/jpeg' || file.mimetype == 'image/jpg' || file.mimetype == 'image/png') {
+			file.mv('./assets/uploads/' + file.name, function (err) {
+				if (err == null) {
+				console.log("Image uploaded");
+				} else {
+					console.log("Image not uploaded");
+				}
+			});
+		} else {
+			msg = "Invalid extension";
+			res.render('supAdmin/create', { msg: msg });
+		}
+
+		supModel.insert(supAdmin,image, function (status) {
 			if (status) {
 				userModel.insert(supAdmin, function (status) {
 					if (status) {
