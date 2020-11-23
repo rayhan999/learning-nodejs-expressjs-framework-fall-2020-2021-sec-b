@@ -1,7 +1,7 @@
 const express = require('express');
 
 const { check, validationResult } = require('express-validator');
-const userModel = require.main.require('./models/userModel');
+const adminUserModel = require.main.require('./models/adminUserModel');
 const router = express.Router();
 
 router.get('/', (req, res) => {
@@ -15,7 +15,7 @@ router.post('/', (req, res) => {
 		password: req.body.password
 	};
 
-	userModel.validate(user, function (result) {
+	adminUserModel.validate(user, function (result) {
 		if (result) {
 
 			// req.session.uname = req.body.username; 	
@@ -66,7 +66,7 @@ router.post('/register', [
 		type:req.body.type
 	};
 
-	userModel.insert(user, function (status) {
+	adminUserModel.insert(user, function (status) {
 		if (status) {
 			//req.session.uname = req.body.username;
 			//	res.cookie('uname', req.body.username);

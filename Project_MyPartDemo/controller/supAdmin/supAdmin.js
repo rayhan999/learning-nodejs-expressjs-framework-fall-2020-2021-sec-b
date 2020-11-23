@@ -3,8 +3,8 @@ const bodyParser = require('body-parser');
 const { check, validationResult } = require('express-validator');
 const supModel = require('../../models/supModel');
 const { runInNewContext } = require('vm');
-const userModel = require('../../models/userModel');
-// const userModel = require.main.require('././models/supModel');
+const adminUserModel = require('../../models/adminUserModel');
+// const adminUserModel = require.main.require('././models/supModel');
 const router = express.Router();
 const app = express();
 const urlencodedparser = bodyParser.urlencoded({ extended: false });
@@ -29,9 +29,10 @@ router.post('/create', [
 		console.log(errors.array());
 		const alerts = errors.array();
 
-		res.render('supAdmin/create', { alerts })
+		res.render('supAdmin/create', { alerts });
 	} else {
-		console.log("supadmin e dhuksi");
+		message = "";
+		//console.log("supadmin e dhuksi");
 		var supAdmin = {
 			username: req.body.username,
 			name: req.body.name,
@@ -58,13 +59,14 @@ router.post('/create', [
 				}
 			});
 		} else {
-			msg = "Invalid extension";
-			res.render('supAdmin/create', { msg: msg });
+			message = "Invalid extension";
+			res.render('supAdmin/create', { message });
+			
 		}
 
 		supModel.insert(supAdmin,image, function (status) {
 			if (status) {
-				userModel.insert(supAdmin, function (status) {
+				adminUserModel.insert(supAdmin, function (status) {
 					if (status) {
 						res.redirect('/supAdmin_home/supAdmin');
 					} else {
@@ -82,7 +84,7 @@ router.post('/create', [
 router.get('/edit/:id', (req, res) => {
 
 
-	userModel.getById(req.params.id, function (result) {
+	adminUserModel.getById(req.params.id, function (result) {
 
 		var user = {
 			username: result.username,
@@ -103,7 +105,7 @@ router.post('/edit/:id', (req, res) => {
 		password: req.body.password,
 		type: req.body.type
 	};
-	userModel.update(user, function (status) {
+	adminUserModel.update(user, function (status) {
 
 		if (status) {
 			res.redirect('/home/userlist');
@@ -116,7 +118,7 @@ router.post('/edit/:id', (req, res) => {
 })
 
 router.get('/delete/:id', (req, res) => {
-	userModel.getById(req.params.id, function (result) {
+	adminUserModel.getById(req.params.id, function (result) {
 
 		var user = {
 			username: result.username,
@@ -131,10 +133,10 @@ router.get('/delete/:id', (req, res) => {
 
 router.post('/delete/:id', (req, res) => {
 
-	userModel.delete(req.params.id, function (status) {
+	adminUserModel.delete(req.params.id, function (status) {
 		if (status) {
 
-			userModel.delete(req.params.id, function (status) {
+			adminUserModel.delete(req.params.id, function (status) {
 				if (status) {
 					res.redirect('/home/userlist');
 				} else {

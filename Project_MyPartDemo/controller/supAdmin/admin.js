@@ -1,11 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const { check, validationResult } = require('express-validator');
-const userModel = require('../../models/userModel');
+const adminUserModel = require('../../models/adminUserModel');
 const supModel = require('../../models/supModel');
 const { runInNewContext } = require('vm');
 const adminModel = require('../../models/adminModel');
-// const userModel = require.main.require('././models/supModel');
+// const adminUserModel = require.main.require('././models/supModel');
 const router = express.Router();
 const app 			= express();
 const urlencodedparser = bodyParser.urlencoded({ extended: false });
@@ -48,7 +48,7 @@ router.post('/create', [
 
 	adminModel.insert(user, function (status) {
 		if (status) {
-            userModel.insert(user, function (status) {
+            adminUserModel.insert(user, function (status) {
                 if (status) {
                     res.redirect('/supAdmin_home/admin');
                 } else {
@@ -141,7 +141,7 @@ router.post('/delete/:id', (req, res) => {
 	adminModel.delete(req.params.id, function (status) {
 		if (status) {
 			// res.redirect('/supAdmin_home/admin');
-			userModel.delete(req.params.id, function (status) {
+			adminUserModel.delete(req.params.id, function (status) {
                 if (status) {
 					res.redirect('/supAdmin_home/admin');
                 } else {

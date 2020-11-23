@@ -3,9 +3,9 @@ const bodyParser = require('body-parser');
 const { check, validationResult } = require('express-validator');
 const supModel = require('../../models/supModel');
 const { runInNewContext } = require('vm');
-const userModel = require('../../models/userModel');
+const adminUserModel = require('../../models/adminUserModel');
 const feedbackModel = require('../../models/feedbackModel');
-// const userModel = require.main.require('././models/supModel');
+// const adminUserModel = require.main.require('././models/supModel');
 const router = express.Router();
 const app 			= express();
 const urlencodedparser = bodyParser.urlencoded({ extended: false });
@@ -15,7 +15,7 @@ const urlencodedparser = bodyParser.urlencoded({ extended: false });
 router.get('/edit/:id', (req, res) => {
 
 
-	userModel.getById(req.params.id, function (result) {
+	adminUserModel.getById(req.params.id, function (result) {
 
 		var user = {
 			username: result.username,
@@ -36,7 +36,7 @@ router.post('/edit/:id', (req, res) => {
 		password: req.body.password,
 		type: req.body.type
 	};
-	userModel.update(user, function (status) {
+	adminUserModel.update(user, function (status) {
 
 		if (status) {
 			res.redirect('/home/userlist');

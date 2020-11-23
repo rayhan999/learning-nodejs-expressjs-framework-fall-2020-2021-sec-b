@@ -21,21 +21,21 @@ module.exports ={
 		});
 	},
 	getAll: function(callback){
-		var sql = "select * from notice";
+		var sql = "select * from adminnotice";
 		db.getResults(sql, function(results){
 			callback(results);
 		});
 
     },
     getMeeting: function(callback){
-		var sql = "select * from notice where title='Meeting'";
+		var sql = "select * from adminnotice where title='Meeting'";
 		db.getResults(sql, function(results){
 			callback(results);
 		});
 
 	},
 	insert: function(user, callback){
-		var sql = "insert into notice VALUES ('',  '"+user.title+"' , '"+user.details+"' , '"+user.concerned_to+"', '"+user.date+"' )";
+		var sql = "insert into adminnotice VALUES ('',  '"+user.title+"' , '"+user.details+"' , '"+user.concerned_to+"', '"+user.date+"' )";
 		
 		console.log(sql);
 
@@ -58,7 +58,7 @@ module.exports ={
 		});
     },
     search: function(user, callback){
-        var sql = "SELECT username FROM user WHERE username = '"+user.search+"'";
+        var sql = "SELECT username FROM adminuser WHERE username = '"+user.search+"'";
 
 		db.getResults(sql, function(results){
 			if(results.length > 0){

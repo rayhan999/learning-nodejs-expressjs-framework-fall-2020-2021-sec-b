@@ -7,7 +7,7 @@ const subscriberModel = require('../../models/subscriberModel');
 const feedbackModel = require('../../models/feedbackModel');
 const noticeModel = require('../../models/noticeModel');
 
-// const userModel = require.main.require('../../models/verifyModel');
+// const adminUserModel = require.main.require('../../models/verifyModel');
 const router 	= express.Router();
 
 

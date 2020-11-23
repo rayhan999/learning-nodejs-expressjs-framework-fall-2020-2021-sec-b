@@ -7,11 +7,11 @@ var options = { format: 'A4' };
 
 
 const { check, validationResult } = require('express-validator');
-const userModel = require('../../models/userModel');
+const adminUserModel = require('../../models/adminUserModel');
 const subscriberModel = require('../../models/subscriberModel');
 const { runInNewContext } = require('vm');
 const verificationModel = require('../../models/verificationModel');
-// const userModel = require.main.require('././models/supModel');
+// const adminUserModel = require.main.require('././models/supModel');
 const router = express.Router();
 const app = express();
 const urlencodedparser = bodyParser.urlencoded({ extended: false });

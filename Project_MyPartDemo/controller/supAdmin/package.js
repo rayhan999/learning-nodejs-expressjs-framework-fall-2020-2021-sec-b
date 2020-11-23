@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const { check, validationResult } = require('express-validator');
 const supModel = require('../models/supModel');
 const { runInNewContext } = require('vm');
-// const userModel = require.main.require('./models/supModel/supModel');
+// const adminUserModel = require.main.require('./models/supModel/supModel');
 const router = express.Router();
 const app 			= express();
 const urlencodedparser = bodyParser.urlencoded({ extended: false });
@@ -69,7 +69,7 @@ router.post('/create', (req, res)=> {
 router.get('/edit/:id', (req, res) => {
 
 
-	userModel.getById(req.params.id, function (result) {
+	adminUserModel.getById(req.params.id, function (result) {
 
 		var user = {
 			username: result.username,
@@ -90,7 +90,7 @@ router.post('/edit/:id', (req, res) => {
 		password: req.body.password,
 		type: req.body.type
 	};
-	userModel.update(user, function (status) {
+	adminUserModel.update(user, function (status) {
 
 		if (status) {
 			res.redirect('/home/userlist');
@@ -103,7 +103,7 @@ router.post('/edit/:id', (req, res) => {
 })
 
 router.get('/delete/:id', (req, res) => {
-	userModel.getById(req.params.id, function (result) {
+	adminUserModel.getById(req.params.id, function (result) {
 
 		var user = {
 			username: result.username,
@@ -118,7 +118,7 @@ router.get('/delete/:id', (req, res) => {
 
 router.post('/delete/:id', (req, res) => {
 
-	userModel.delete(req.params.id, function (status) {
+	adminUserModel.delete(req.params.id, function (status) {
 		if (status) {
 			res.redirect('/home/userlist');
 		}

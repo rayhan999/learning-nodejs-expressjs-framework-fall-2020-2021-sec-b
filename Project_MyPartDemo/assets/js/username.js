@@ -10,7 +10,7 @@ $(document).ready(function(){
        
 
 		$.ajax({
-			url: '/supAdmin/uname',
+			url: '/supAdmin_home/supAdmin/uname',
 			method: 'post',
 			datatype : 'json',
 			data : {'search':username},
@@ -43,7 +43,7 @@ $(document).ready(function(){
        
 console.log("ajax e aschi");
 		$.ajax({
-			url: '/subscriber/uname',
+			url: '/supAdmin_home/subscriber/uname',
 			method: 'post',
 			datatype : 'json',
 			data : {'search':username},

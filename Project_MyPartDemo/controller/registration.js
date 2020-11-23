@@ -2,7 +2,7 @@ const express 	= require('express');
 const { check, validationResult } = require('express-validator');
 var feature 	= require('../assets/json/packagefeature.json');
 const regModel = require('../models/regModel');
-// const userModel	= require.main.require('./models/supModelregModel');
+// const adminUserModel	= require.main.require('./models/supModelregModel');
 const router 	= express.Router();
 
 router.get('/', (req, res)=>{

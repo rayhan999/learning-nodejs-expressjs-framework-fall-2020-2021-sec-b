@@ -7,7 +7,7 @@ const subscriberModel = require('../../models/subscriberModel');
 const feedbackModel = require('../../models/feedbackModel');
 const noticeModel = require('../../models/noticeModel');
 
-// const userModel = require.main.require('../../models/verifyModel');
+// const adminUserModel = require.main.require('../../models/verifyModel');
 const router 	= express.Router();
 
 
@@ -79,7 +79,7 @@ router.get('/meeting', (req, res)=>{
 
 	noticeModel.getMeeting(function(results){
 		var uname = req.cookies['uname'];
-		res.render('supAdmin_home/meeting', {userlist: results, uname});
+		res.render('supAdmin_home/meeting', { userlist: results, uname});
 	});
 })
 router.get('/template', (req, res)=>{

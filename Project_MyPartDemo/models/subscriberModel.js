@@ -3,7 +3,7 @@ const db = require('./db');
 module.exports ={
 
 	validate: function(user, callback){
-		var sql = "select * from user where username='"+user.username+"' and password='"+user.password+"'";
+		var sql = "select * from adminuser where username='"+user.username+"' and password='"+user.password+"'";
 		db.getResults(sql, function(results){
 			if(results.length > 0){
 				callback(true);
@@ -13,7 +13,7 @@ module.exports ={
 		});
 	},
 	getById: function(id, callback){
-		var sql = "select * from user where id='"+id+"'";
+		var sql = "select * from adminuser where id='"+id+"'";
 		db.getResults(sql, function(results){
 			if(results.length >0 ){
 				callback(results[0]);
@@ -37,14 +37,14 @@ module.exports ={
 		});
 	},
 	update: function(user, callback){
-		var sql = "update user set username='"+user.username+"' , password='"+user.password+"' , type='"+user.type+"' where id = '"+user.id+"'";
+		var sql = "update adminuser set username='"+user.username+"' , password='"+user.password+"' , type='"+user.type+"' where id = '"+user.id+"'";
 		db.execute(sql,function(status){
 			callback(status)
 		});
 
 	},
 	delete: function(id, callback){
-		var sql = "DELETE FROM user WHERE id = '"+id+"'";
+		var sql = "DELETE FROM adminuser WHERE id = '"+id+"'";
 		console.log(sql);
 		db.execute(sql,function(status){
 			callback(status);

@@ -37,21 +37,21 @@ module.exports ={
 		});
 	},
 	update: function(user, callback){
-		var sql = "update user set username='"+user.username+"' , password='"+user.password+"' , type='"+user.type+"' where id = '"+user.id+"'";
+		var sql = "update adminuser set username='"+user.username+"' , password='"+user.password+"' , type='"+user.type+"' where id = '"+user.id+"'";
 		db.execute(sql,function(status){
 			callback(status)
 		});
 
 	},
 	delete: function(id, callback){
-		var sql = "DELETE FROM user WHERE id = '"+id+"'";
+		var sql = "DELETE FROM adminuser WHERE id = '"+id+"'";
 		console.log(sql);
 		db.execute(sql,function(status){
 			callback(status);
 		});
     },
     search: function(user, callback){
-        var sql = "SELECT username FROM user WHERE username = '"+user.search+"'";
+        var sql = "SELECT username FROM adminuser WHERE username = '"+user.search+"'";
 
 		db.getResults(sql, function(results){
 			if(results.length > 0){
