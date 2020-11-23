@@ -58,10 +58,12 @@
 								<th>Email</th>
 								<th>Contact</th>
 								
-								<th>Address</th>
+								
 								<th>Manager Name</th>
 						
 								<th class="datatable-nosort">Action</th>
+								
+								<th>Address</th>
 								<th>Total Employee</th>
 							</tr>
 						</thead>
@@ -74,7 +76,7 @@
 								<td><%= userlist[i].Company_Email %></td>
 								<td><%= userlist[i].Contact_No %></td>
 								
-								<td><%= userlist[i].Company_Address %></td>
+							
 								<td><%= userlist[i].Manager_Name %></td>
 								
 								<td>
@@ -87,12 +89,14 @@
 										</a>
 										<div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
 											
-											<a class="dropdown-item" href="/verification/verify/<%=userlist[i].id%>"><i class="dw dw-edit2"></i> Verify</a>
-											<a class="dropdown-item" href="/verification/delete/<%=userlist[i].id%>"><i class="dw dw-delete-3"></i> Delete</a>
+											<a class="dropdown-item" href="/supAdmin_home/verification/verify/<%=userlist[i].id%>"><i class="dw dw-edit2"></i> Verify</a>
+											<!-- <a class="dropdown-item" href="/supAdmin_home/verification/delete/<%=userlist[i].id%>"><i class="dw dw-delete-3"></i> Delete</a> -->
 										</div>
 									</div>
 
 								</td>
+								
+								<td><%= userlist[i].Company_Address %></td>
 								<td><%= userlist[i].Total_Employee %> </td>
 							</tr>
 							<% } %>

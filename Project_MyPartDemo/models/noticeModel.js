@@ -37,7 +37,7 @@ module.exports ={
 	insert: function(user, callback){
 		var sql = "insert into notice VALUES ('',  '"+user.title+"' , '"+user.details+"' , '"+user.concerned_to+"', '"+user.date+"' )";
 		
-		//console.log(sql);
+		console.log(sql);
 
 		db.execute(sql, function(status){
 			callback(status);

@@ -43,13 +43,13 @@ app.use('/supAdmin_home', supAdmin_home);
 app.use('/admin_home', admin_home);
 app.use('/logout', logout);
 app.use('/user', user);
-app.use('/supAdmin', supAdmin);
-app.use('/admin', admin);
-app.use('/subscriber', subscriber);
-app.use('/verification', verification);
-app.use('/feedback', feedback);
-app.use('/feedback', feedbackadmin);
-app.use('/meeting', meeting);
+app.use('/supAdmin_home/supAdmin', supAdmin);
+app.use('/supAdmin_home/admin', admin);
+app.use('/supAdmin_home/subscriber', subscriber);
+app.use('/supAdmin_home/verification', verification);
+app.use('/supAdmin_home/feedback', feedback);
+app.use('/admin_home/feedback', feedbackadmin);
+app.use('/supAdmin_home/meeting', meeting);
 app.use('/getstarted',registration);
 
 //route
