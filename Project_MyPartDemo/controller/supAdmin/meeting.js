@@ -28,7 +28,7 @@ router.post('/create', [
 		console.log(errors.array());
 		const alerts = errors.array();
 		
-		res.render('supAdmin/create',{alerts})
+		res.render('meeting/create',{alerts})
 	} else {
 	var user = {
         title:req.body.title,

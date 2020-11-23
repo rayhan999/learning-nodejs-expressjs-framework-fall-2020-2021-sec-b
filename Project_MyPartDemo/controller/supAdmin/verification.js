@@ -73,9 +73,17 @@ router.get('/verify/:id', (req, res) => {
 			cmname: result.Manager_Name
 		};
 
-		res.render('verification/verify', user);
+		//res.render('verification/verify', user);
 	});
-
+	pdf.create(html, options).toFile('assets/uploads/invoice.pdf', function (err, res) {
+		if (err) { return console.log(err); }
+		else {
+			console.log(res); // { filename: '/app/businesscard.pdf' } 
+			// var datafile = fs.readFileSync('assets/uploads/invoice.pdf');
+			// res.header('content-type', 'application/pdf');
+			// res.send(datafile);
+		}
+	});
 
 })
 
@@ -93,7 +101,7 @@ router.post('/verify/:id', [
 		console.log(errors.array());
 		const alerts = errors.array();
 		
-		res.render('supAdmin/create',{alerts})
+		res.render('verification/verify',{alerts})
 	} else {
 
 	verificationModel.delete(req.params.id, function (status) {

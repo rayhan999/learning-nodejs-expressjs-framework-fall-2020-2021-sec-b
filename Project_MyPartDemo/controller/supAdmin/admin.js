@@ -31,7 +31,7 @@ router.post('/create', [
 		console.log(errors.array());
 		const alerts = errors.array();
 		
-		res.render('supAdmin/create',{alerts})
+		res.render('admin/create',{alerts})
 	} else {
 	var user = {
 		username: req.body.username,

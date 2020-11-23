@@ -14,7 +14,7 @@ router.post('/', [
 	check('type', 'type must be at least 4 character').exists().isLength({min:4}),
 	check('cname', 'company name name must be at least 3 character').isLength({min:3}),
 	check('cmobile', 'mobile must be at least 4 character').exists().isLength({min:4}).isNumeric(),
-	check('cemployee', 'Employee Number must be at least 4 character').exists().isLength({min:4}).isNumeric(),
+	check('cemployee', 'Employee Number must be at least  character').exists().isLength({min:1}).isNumeric(),
 	check('caddress', 'address must be at least 5 character').exists().isLength({min:5}),
 	check('cmname', 'Manager NAme must be at least 4 character').exists().isLength({min:4}),
 	check('cemail', 'Company Email is not valid').isEmail().normalizeEmail()
@@ -25,7 +25,7 @@ router.post('/', [
 		console.log(errors.array());
 		const alerts = errors.array();
 		
-		res.render('login/getstarted',{alerts});
+		res.render('login/getstarted',{alerts, featurelist : feature});
 	} else {
 
 	var user = {
