@@ -16,41 +16,6 @@ const router = express.Router();
 const app = express();
 const urlencodedparser = bodyParser.urlencoded({ extended: false });
 
-// router.get('/verify', (req, res) => {
-// 	res.render('verification/verify');
-// })
-
-
-// // })
-
-// router.post('/verify', (req, res)=> {
-// 	var user = {
-// 		type:req.body.type,
-// 		cname : req.body.cname,
-// 		cemail:req.body.cemail,
-// 		cmobile:req.body.cmobile,
-// 		cemployee:req.body.cemployee,
-// 		caddress:req.body.caddress,
-// 		cmname:req.body.cmname
-
-
-// 	};
-
-// 	verificationModel.insert(user, function (status) {
-// 		if (status) {
-//             userModel.insert(user, function (status) {
-//                 if (status) {
-//                     res.redirect('/supAdmin_home/admin');
-//                 } else {
-//                     res.render('admin/create');
-//                 }
-//             });
-// 		} else {
-// 			res.render('admin/create');
-// 		}
-//     });
-
-// })
 
 router.get('/edit/:id', (req, res) => {
 
