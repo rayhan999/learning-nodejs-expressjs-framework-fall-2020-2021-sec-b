@@ -68,7 +68,7 @@
                                 <th class="table-plus datatable-nosort">Image</th>
                                 <th>Model Name</th>
                                 <th>Type</th>
-                                <th>Availability</th>
+                               
                                 <th>Rent Price<small>(per day)</small></th>
 
                                 <th class="datatable-nosort">Action</th>
@@ -84,11 +84,7 @@
                                         <a href="/home/cars/view/<%=userlist[i].id%>"><%= userlist[i].name %></a>
                                     </td>
                                     <td><%= userlist[i].type %></td>
-                                    <% if(userlist[i].availability == "Available"){%>
-                                    <td style="color: green;"><%= userlist[i].availability %></td>
-                                    <% }else{%>
-                                        <td style="color: brown;"><%= userlist[i].availability %></td>
-                                        <% } %>
+                                    
                                     <td><%= userlist[i].rentprice %></td>
                                  
 

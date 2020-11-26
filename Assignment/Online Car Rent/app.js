@@ -14,6 +14,7 @@ const pdf 					= require('html-pdf');
 // const user					= require('./controller/user');
 const login					= require('./controller/login');
  const home					= require('./controller/home');
+ const cars					= require('./controller/cars');
 // const logout				= require('./controller/logout');
 // const markethome			= require('./controller/marketing/markethome');
 // const campaigns				= require('./controller/marketing/campaigns');
@@ -61,6 +62,7 @@ app.use(expfileupload());
 // app.use('/getstarted',registration);
 // app.use('/forgotPassword', forgotPassword);
  app.use('/home', home);
+ app.use('/home/cars',cars)
 // app.use('/markethome', markethome);
 // app.use('/campaigns',campaigns);
 // app.use('/clients',clients);

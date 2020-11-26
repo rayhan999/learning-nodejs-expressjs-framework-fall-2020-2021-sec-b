@@ -1,0 +1,121 @@
+<%- include('../partials/navbar.ejs')%>
+<%- include('../partials/sidebar_right.ejs')%>
+<% if(type == "Admin"){%>
+<%- include('../partials/admin_sidebar.ejs')%>
+<%}else if(type == "Member"){ %>
+<%- include('../partials/member_sidebar.ejs')%>
+<% } %>
+
+
+
+
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>Add Car</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Add Car</li>
+                            </ol>
+                        </nav>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+
+            <% if(typeof alerts != 'undefined'){ %>
+            <% alerts.forEach(function (error) {%>
+
+
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <%= error.msg %>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <% }) %>
+            <% } %>
+
+
+            <div class="pd-20 card-box mb-30">
+
+                <div class="clearfix">
+                    <h4 class="text-blue h4">Add Car Info </h4>
+
+                </div>
+
+                <div>
+                    <form method="POST" enctype="multipart/form-data">
+
+
+                        <div class="form-group">
+                            <label >Car Model Name</label>
+                            <input class="form-control" type="text" name="model">
+                        </div>
+
+                        <div class="form-group">
+                            <label >rent Price</label>
+                            <input class="form-control" type="number" name="rentprice">
+                        </div>
+                        <div class="form-group">
+                            <label >Description</label>
+                            <textarea class="form-control" type="text" name="description"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label >Car Type</label>
+                            <select class="form-control" name="type">
+                                <option disabled selected>Choose..</option>
+                                <option value="Private Car">Private Car</option>
+                                <option value="PickUp">PickUp </option>
+                                <option value="Microbus">Microbus</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label >Is Featured</label>
+                            <div class="custom-control custom-radio mb-5">
+                                <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" value="Yes">
+                                <label class="custom-control-label" for="customRadio1">Yes</label>
+                            </div>
+                            <div class="custom-control custom-radio mb-5">
+                                <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input" value="No">
+                                <label class="custom-control-label" for="customRadio2">No</label>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group">
+                            <label >Image</label>
+                            <input type="file" class="form-control-file form-control height-auto" name="image">
+
+                        </div>
+                        <div class="col-md-12 col-sm-12 mb-30">
+
+                            <div class="pd-20 card-box height-100-p">
+                                <div class="btn-list" style="float: right;">
+                                    <!-- <button type="button" class="btn btn-outline-dark">Reset</button> -->
+                                    <button type="submit" class="btn btn-outline-success">Submit</button>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
