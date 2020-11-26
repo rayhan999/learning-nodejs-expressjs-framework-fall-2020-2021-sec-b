@@ -23,7 +23,9 @@ router.post('/create', [
     check('model', 'Name cannot be empty').not().isEmpty(),
     check('rentprice', 'Rent Price cannot be empty').not().isEmpty().isNumeric(),
     check('type', 'Car type cannot be empty').not().isEmpty(),
-    check('customRadio', 'Featured type cannot be empty').not().isEmpty()
+    check('customRadio', 'Featured type cannot be empty').not().isEmpty(),
+    check('image', 'Image type cannot be empty').not().isEmpty()
+
 
     // //check('username', 'Username name must be at least 3 character').exists().isLength({min:3}),
     // check('mobile', 'mobile must be at least 4 character').exists().isLength({min:4}),
@@ -32,16 +34,17 @@ router.post('/create', [
     // check('email', 'Email is not valid').isEmail().normalizeEmail()
 
 ], (req, res) => {
+    var uname = req.cookies['uname'];
+        var type = req.cookies['type'];
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         console.log(errors.array());
         const alerts = errors.array();
 
-        res.render('cars/create', { alerts });
+        res.render('cars/create', { alerts,uname,type });
     } else {
         //console.log("Else e aschi");
-        var uname = req.cookies['uname'];
-        var type = req.cookies['type'];
+        
         if (req.files.image) {
            // console.log("file paise");
             var file = req.files.image;
