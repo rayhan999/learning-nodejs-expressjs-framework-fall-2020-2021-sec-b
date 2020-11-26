@@ -54,53 +54,9 @@ router.post('/', (req, res)=>{
 
 })
 
-router.get('/adminlogin', (req, res)=>{
-	var message = null;
-	//console.log(message);
-	res.render('login/adminlogin',{message : message});
-})
 
-router.post('/adminlogin', (req, res)=>{
-	
-	var user = {
-		username: req.body.username,
-		password: req.body.password
-	};
 
-	adminUserModel.validate(user, function(result){
-		if(result){
-			
-			//req.session.uname = req.body.username;
-			/* res.cookie('uname', req.body.username);
-			res.redirect('/home'); */	
-			res.cookie('uname', req.body.username);
-			var user = {
-				username: result.username,
-				password: result.password,
-				type: result.type
-			};
-			console.log(user);
-			if(user.type == "Super Admin"){
-				res.redirect('/supAdmin_home');
-			}
-			else if(user.type == "Admin"){
-				res.redirect('/admin_home');
-			}
-			else{
-				var  message = "Wrong Username or password";
-				//console.log(message);
-				res.render('login/adminlogin',{message : message});
-				
-			}
 
-		}else{
-			var  message = "Wrong Username or password";
-				//console.log(message);
-			res.render('login/adminlogin',{message : message});
-		}
-	});
-
-})
 
 router.get('/register', (req, res) => {
 	res.render('login/register')

@@ -1,5 +1,7 @@
 const express 	= require('express');
+
 const userModel = require.main.require('./models/userModel');
+const carModel = require.main.require('./models/carModel');
 const router 	= express.Router();
 
 router.get('/', (req, res)=>{
@@ -16,6 +18,15 @@ router.get('/', (req, res)=>{
 	var type = req.cookies['type'];
 	//console.log(uname);
 	res.render('home/index',{uname,type});
+})
+
+router.get('/cars', (req, res)=>{
+	
+	carModel.getAll(function(results){
+		var uname = req.cookies['uname'];
+		var type = req.cookies['type'];
+		res.render('home/cars',{ userlist:results , uname,type}); 
+	});
 })
 
 router.get('/userlist', (req, res)=>{
