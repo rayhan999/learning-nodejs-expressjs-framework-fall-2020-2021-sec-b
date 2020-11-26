@@ -97,8 +97,17 @@
                                                 <i class="dw dw-more"></i>
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                                                <a class="dropdown-item" href="/home/cars/view/<%=userlist[i].id%>"><i class="dw dw-eye"></i> View</a>
+                                                
 
+                                                <% if(type == "Admin"){%>
+                                                    <a class="dropdown-item" href="/home/cars/edit/<%=userlist[i].id%>"><i class="icon-copy fa fa-edit" aria-hidden="true"></i></i> Update</a>
+
+                                                    <a class="dropdown-item" href="/home/cars/delete/<%=userlist[i].id%>"><i class="icon-copy fa fa-trash" aria-hidden="true"></i> Delete</a>
+
+                                                    <%}else if(type == "Member"){ %>
+                                                        <a class="dropdown-item" href="/home/cars/view/<%=userlist[i].id%>"><i class="dw dw-eye"></i> View</a>
+
+                                                    <% } %>
                                             </div>
                                         </div>
 

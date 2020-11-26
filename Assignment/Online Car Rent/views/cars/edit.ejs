@@ -1,0 +1,112 @@
+
+<%- include('../partials/navbar.ejs')%>
+<%- include('../partials/sidebar_right.ejs')%>
+<% if(type == "Admin"){%>
+<%- include('../partials/admin_sidebar.ejs')%>
+<%}else if(type == "Member"){ %>
+<%- include('../partials/member_sidebar.ejs')%>
+<% } %>
+
+
+<div class="main-container">
+	<div class="pd-ltr-20 xs-pd-20-10">
+		<div class="min-height-200px">
+			<div class="page-header">
+				<div class="row">
+					<div class="col-md-6 col-sm-12">
+						<div class="title">
+							<h4>Edit  Admin</h4>
+						</div>
+						<nav aria-label="breadcrumb" role="navigation">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item"><a href="">Home</a></li>
+								<li class="breadcrumb-item active" aria-current="page">View  Cars</li>
+							</ol>
+						</nav>
+					</div>
+
+				</div>
+			</div>
+
+
+
+			
+			
+			
+
+			<div class="pd-20 card-box mb-30">
+
+				<div class="clearfix">
+					<h4 class="text-blue h4">View Car </h4>
+
+				</div>
+
+
+				<form  method="POST" enctype="multipart/form-data">
+					
+					<div class="form-group">
+                        <label >Car Model Name</label>
+                        <input class="form-control" type="text" name="model" value="<%= car.model %>">
+                    </div>
+
+                    <div class="form-group">
+                        <label >rent Price</label>
+                        <input class="form-control" type="number" name="rentprice" value="<%= car.rentprice %>">
+                    </div>
+                    <div class="form-group">
+                        <label >Description</label>
+                        <textarea class="form-control" type="text" name="description" ><%= car.description %></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label >Car Type</label>
+                        <select class="form-control" name="type" >
+                            <option value="<%= car.type %>" selected><%= car.type %></option>
+                            <option value="Private Car">Private Car</option>
+                            <option value="PickUp">PickUp </option>
+                            <option value="Microbus">Microbus</option>
+                        </select>
+                    </div>
+                    <!-- <div class="form-group">
+                        <label >Is Featured</label>
+                        <div class="custom-control custom-radio mb-5">
+                        <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" value="Yes" <% if(car.customRadio == "Yes" ){%> checked="true" <% } %> >
+                            <label class="custom-control-label" for="customRadio1">Yes</label>
+                        </div>
+                        <div class="custom-control custom-radio mb-5">
+                            <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input" value="No" <% if(car.customRadio == "No" ){%> checked="true" <% } %>>
+                            <label class="custom-control-label" for="customRadio2">No</label>
+                        </div>
+
+                    </div> -->
+
+                    <div class="form-group">
+                        <label >Image</label></br>
+                        <input type="file" class="form-control-file form-control height-auto" name="image">
+                        <img src="<%= car.image %>" alt="">
+
+                    </div>
+                    <div class="col-md-12 col-sm-12 mb-30">
+
+                        <div class="pd-20 card-box height-100-p">
+                            <div class="btn-list" style="float: right;">
+                                <!-- <button type="button" class="btn btn-outline-dark">Reset</button> -->
+                               
+                              
+                             
+                                    <button type="submit" class="btn btn-outline-info">Update</button>
+                               
+
+                            </div>
+                        </div>
+                    </div>
+				</form>
+
+
+
+			</div>
+
+
+
+		</div>
+	</div>
+</div>
