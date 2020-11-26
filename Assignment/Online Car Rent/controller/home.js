@@ -2,6 +2,7 @@ const express 	= require('express');
 
 const userModel = require.main.require('./models/userModel');
 const carModel = require.main.require('./models/carModel');
+const rentalModel = require.main.require('./models/rentalModel');
 const router 	= express.Router();
 
 router.get('/', (req, res)=>{
@@ -29,12 +30,13 @@ router.get('/cars', (req, res)=>{
 	});
 })
 
-router.get('/userlist', (req, res)=>{
-
-	userModel.getAll(function(results){
-		res.render('home/userlist', {userlist: results});
+router.get('/rentalhistory', (req, res)=>{
+	
+	rentalModel.getAll(function(results){
+		var uname = req.cookies['uname'];
+		var type = req.cookies['type'];
+		res.render('home/rentalhistory',{ userlist:results , uname,type}); 
 	});
-
 })
 router.get('/calendar', (req, res)=>{
 	res.render('home/calendar'); 

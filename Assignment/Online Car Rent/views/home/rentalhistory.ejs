@@ -42,18 +42,10 @@
                 <div class="pd-20">
                     <div class="clearfix">
                         <div class="pull-left">
-                            <h4 class="text-blue h4">Car List</h4>
+                            <h4 class="text-blue h4">Rental List</h4>
 
                         </div>
-                        <% if(type == "Admin"){%>
-                        <div class="pull-right">
-                            <a href="/home/cars/create">
-                                <button type="button" class="btn btn-primary">Add Car</button>
-                            </a>
-                        </div>
-                        <%}else if(type == "Member"){ %>
-
-                        <% } %>
+                       
 
 
                     </div>
@@ -67,30 +59,25 @@
                             <tr>
                                 <th class="table-plus datatable-nosort">Image</th>
                                 <th>Model Name</th>
-                                <th>Type</th>
-                                <th>Availability</th>
+                                <th>Member Name</th>
                                 <th>Rent Price<small>(per day)</small></th>
-
+                                <th>Issue Date</th>
                                 <th class="datatable-nosort">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             <% for(var i=0; i< userlist.length; i++ ){ %>
-                            <!-- <a href="/supAdmin_home/admin/edit/<%=userlist[i].id%>"> -->
+                            
                                 <tr>
                                     <td class="table-plus"><img class="card-image" src="<%= userlist[i].image %>"
                                             style="display: flex;height: 100px; width: 100px;"></img></td>
                                     <td>
-                                        <a href="/home/cars/view/<%=userlist[i].id%>"><%= userlist[i].name %></a>
+                                        <%= userlist[i].model %>
                                     </td>
-                                    <td><%= userlist[i].type %></td>
-                                    <% if(userlist[i].availability == "Available"){%>
-                                    <td style="color: green;"><%= userlist[i].availability %></td>
-                                    <% }else{%>
-                                        <td style="color: brown;"><%= userlist[i].availability %></td>
-                                        <% } %>
+                                    <td><%= userlist[i].member %></td>
                                     <td><%= userlist[i].rentprice %></td>
-                                 
+                                    <td><%= userlist[i].date %></td>
+
 
                                     <td>
 
@@ -109,7 +96,7 @@
                                     </td>
 
                                 </tr>
-                            <!-- </a> -->
+                         
                             <% } %>
 
                         </tbody>
