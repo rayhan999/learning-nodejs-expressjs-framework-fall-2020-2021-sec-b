@@ -32,7 +32,7 @@ module.exports ={
 
 	},
 	insert: function(user, callback){
-		var sql = "insert into user VALUES ('', '"+user.username+"' , '"+user.password+"' , '"+user.type+"','','','','')";
+		var sql = "insert into blogs VALUES ('', '"+user.title+"' , '"+user.date+"' , '"+user.created_by+"', '"+user.description+"', '"+user.image+"')";
 		
 		console.log(sql);
 

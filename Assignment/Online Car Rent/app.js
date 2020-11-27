@@ -18,6 +18,7 @@ const login					= require('./controller/login');
  const cars					= require('./controller/cars');
  const member					= require('./controller/member');
  const admin					= require('./controller/admin');
+ const blogs					= require('./controller/blogs');
 // const logout				= require('./controller/logout');
 // const markethome			= require('./controller/marketing/markethome');
 // const campaigns				= require('./controller/marketing/campaigns');
@@ -69,6 +70,7 @@ app.use('/registration', register);
  app.use('/home/cars',cars)
  app.use('/home/member',member)
  app.use('/home/admin',admin)
+ app.use('/home/blogs',blogs)
 // app.use('/markethome', markethome);
 // app.use('/campaigns',campaigns);
 // app.use('/clients',clients);

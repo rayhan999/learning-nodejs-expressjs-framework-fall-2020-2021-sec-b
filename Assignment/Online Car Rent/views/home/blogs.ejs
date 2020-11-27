@@ -45,7 +45,7 @@
                             <h4 class="text-blue h4">Rental List</h4>
 
                         </div>
-                       
+
                         <div class="pull-right">
                             <a href="/home/blogs/create">
                                 <button type="button" class="btn btn-primary">Create Blog</button>
@@ -64,43 +64,62 @@
                                 <th class="table-plus datatable-nosort">Image</th>
                                 <th>Title</th>
                                 <th>Date</th>
-                                
+
                                 <th>Created By</th>
                                 <th class="datatable-nosort">Action</th>
+                                <th>Description</th>
                             </tr>
                         </thead>
                         <tbody>
                             <% for(var i=0; i< userlist.length; i++ ){ %>
-                            
-                                <tr>
-                                    <td class="table-plus"><img class="card-image" src="<%= userlist[i].image %>"
-                                            style="display: flex;height: 100px; width: 100px;"></img></td>
-                                    <td>
-                                        <%= userlist[i].title %>
-                                    </td>
-                                    <td><%= userlist[i].date %></td>
-                                    <td><%= userlist[i].created_by %></td>
-                                   
+
+                            <tr>
+                                <td class="table-plus"><img class="card-image" src="<%= userlist[i].image %>"
+                                        style="display: flex;height: 100px; width: 100px;"></img></td>
+                                <td>
+                                    <%= userlist[i].title %>
+                                </td>
+                                <td><%= userlist[i].date %></td>
+                                <td><%= userlist[i].created_by %></td>
 
 
-                                    <td>
+
+                                <td>
 
 
-                                        <div class="dropdown">
-                                            <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"
-                                                href="#" role="button" data-toggle="dropdown">
-                                                <i class="dw dw-more"></i>
-                                            </a>
-                                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                                                <a class="dropdown-item" href="/home/cars/view/<%=userlist[i].id%>"><i class="dw dw-eye"></i> View</a>
+                                    <div class="dropdown">
+                                        <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"
+                                            href="#" role="button" data-toggle="dropdown">
+                                            <i class="dw dw-more"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
 
-                                            </div>
+                                            <% if(type == "Admin"){%>
+                                                
+                                            <a class="dropdown-item" href="/home/blogs/delete/<%=userlist[i].id%>"><i
+                                                    class="dw dw-eye"></i> Delete</a>
+                                           
+                                            <a class="dropdown-item" href="/home/blogs/view/<%=userlist[i].id%>"><i
+                                                    class="dw dw-eye"></i> View</a>
+                                            <% }else{ %>
+                                            <% if(uname == userlist[i].created_by){%>
+                                            <a class="dropdown-item" href="/home/blogd/edit/<%=userlist[i].id%>"><i
+                                                    class="dw dw-eye"></i> Edit</a>
+                                            <a class="dropdown-item" href="/home/blogs/delete/<%=userlist[i].id%>"><i
+                                                    class="dw dw-eye"></i> Delete</a>
+                                            <% }else{%>
+                                            <a class="dropdown-item" href="/home/blogs/view/<%=userlist[i].id%>"><i
+                                                    class="dw dw-eye"></i> View</a>
+                                            <% } %>
+                                            <% } %>
                                         </div>
+                                    </div>
+                                    <td><%= userlist[i].description %></td>
 
-                                    </td>
+                                </td>
 
-                                </tr>
-                         
+                            </tr>
+
                             <% } %>
 
                         </tbody>
