@@ -1,0 +1,171 @@
+<%- include('../partials/navbar.ejs')%>
+<%- include('../partials/sidebar_right.ejs')%>
+<% if(type == "Admin"){%>
+<%- include('../partials/admin_sidebar.ejs')%>
+<%}else if(type == "Member"){ %>
+<%- include('../partials/member_sidebar.ejs')%>
+<% } %>
+
+
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>Car List</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Car List</li>
+                            </ol>
+                        </nav>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+
+            <!-- <div class="card-box mb-30" style="float: right; padding-right: 20px; padding-top: 20px;">
+                <a href="/user/create">
+                    <button type="button" class="btn btn-primary">Primary</button>
+                </a>
+             </div> -->
+
+
+
+            <div class="card-box mb-30">
+                <div class="pd-20">
+                    <div class="clearfix">
+                        <div class="pull-left">
+                            <h4 class="text-blue h4">Car List</h4>
+
+                        </div>
+                        <% if(type == "Admin"){%>
+                        <div class="pull-right">
+                            <a href="/home/cars/create">
+                                <button type="button" class="btn btn-primary">Add Car</button>
+                            </a>
+                        </div>
+                        <%}else if(type == "Member"){ %>
+
+                        <% } %>
+
+
+                    </div>
+
+                </div>
+
+                <div class="pb-20">
+
+
+
+                    <form>
+
+                        <div class="form-group">
+                            <label>Destination From</label>
+                            <input class="form-control " placeholder="Select Location" type="text">
+                        </div>
+                        <div class="form-group">
+                            <label>Destination To</label>
+                            <input class="form-control " placeholder="Select Location" type="text">
+                        </div>
+                        <div class="form-group">
+                            <label>Date from</label>
+                            <input class="form-control date-picker" placeholder="Select Date" type="text" id="fromdate">
+                        </div>
+                        <div class="form-group">
+                            <label>Date to</label>
+                            <input class="form-control date-picker" placeholder="Select Date" type="text" id="todatedate">
+                        </div>
+                        <!-- <div class="col-md-3 col-sm-12">
+                                    <div class="form-group">
+                                        <label>time Delive</label>
+                                        <input class="form-control time-picker-default" placeholder="time" type="text">
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-12">
+
+                                    <div class="form-group">
+                                        <label>Train departure</label>
+                                        <input class="form-control time-picker-default" placeholder="time" type="text">
+                                    </div>
+                                </div> -->
+
+                        <div class="col-md-12 col-sm-12 mb-30">
+
+                            <div class="pd-20 card-box height-100-p">
+                                <div class="btn-list" style="float: right;">
+                                    <!-- <button type="button" class="btn btn-outline-dark">Reset</button> -->
+                                    <button type="" class="btn btn-outline-success" id="search">Search Car</button>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+
+<div id="result">
+
+</div>
+
+
+                    </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+$(document).ready(function(){
+	$('#search').on('click',function(){
+		// var search = $("#search").val();
+        // var searchby = $("#searchby").val();
+        var fromdate = $("#fromdate").val();
+        var todate = $("#todate").val();
+
+		$.ajax({
+			url: '/cars/search',
+			method: 'post',
+			datatype : 'json',
+			data : {'fromdate':fromdate,
+					'todate':todate},
+			success:function(response){
+				if(response.user !== 'error'){
+					var tableBody="<tr><td>ID</td><td>Name</td><td>User Name</td><td>Company Name</td><td>Contact No</td><td>Type</td><td>Action</td></tr>";
+					response.user.forEach(element => {
+						var tableRow="";
+						tableRow+="<td>"+element.id+"</td>";
+						tableRow+="<td>"+element.name+"</td>";
+						tableRow+="<td>"+element.username+"</td>";
+						tableRow+="<td>"+element.companyname+"</td>";
+						tableRow+="<td>"+element.contactno+"</td>";
+						if(element.type == 0){
+							tableRow+="<td>Admin</td>";
+						}
+						else{
+							tableRow+="<td>Employee</td>";
+						}
+						tableRow += "<td><a href='/user/edit/"+element.id+"'>Edit</a> | <a href='/user/delete/"+element.id+"'>Delete</a></td>";
+						tableBody=tableBody+"<tr>"+tableRow+"</tr>";
+					});
+					$('#result').html(tableBody);
+				}else{
+
+				}
+			},
+			error:function(response){
+				alert('server error');
+			}
+		});
+	});
+});
+</script>

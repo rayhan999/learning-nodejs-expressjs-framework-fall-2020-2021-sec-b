@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const { check, validationResult } = require('express-validator');
-const rentalModel = require('../models/rentalModel');
+const carModel = require('../models/carModel');
 const { compile } = require('ejs');
 
 const router = express.Router();

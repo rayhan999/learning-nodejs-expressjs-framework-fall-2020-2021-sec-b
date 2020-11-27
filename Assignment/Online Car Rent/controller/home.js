@@ -4,6 +4,9 @@ const userModel = require.main.require('./models/userModel');
 const carModel = require.main.require('./models/carModel');
 const rentalModel = require.main.require('./models/rentalModel');
 const blogModel = require.main.require('./models/blogModel');
+const adminModel = require.main.require('./models/adminMOdel');
+const memberModel = require.main.require('./models/memberModel');
+//const reservationModel = require.main.require('./models/reservationModel');
 const router 	= express.Router();
 
 router.get('/', (req, res)=>{
@@ -21,7 +24,22 @@ router.get('/', (req, res)=>{
 	//console.log(uname);
 	res.render('home/index',{uname,type});
 })
-
+router.get('/admin', (req, res)=>{
+	
+	adminModel.getAll(function(results){
+		var uname = req.cookies['uname'];
+		var type = req.cookies['type'];
+		res.render('home/admin',{ userlist:results , uname,type}); 
+	});
+})
+router.get('/member', (req, res)=>{
+	
+	memberModel.getAll(function(results){
+		var uname = req.cookies['uname'];
+		var type = req.cookies['type'];
+		res.render('home/member',{ userlist:results , uname,type}); 
+	});
+})
 router.get('/cars', (req, res)=>{
 	
 	carModel.getAll(function(results){
@@ -46,6 +64,15 @@ router.get('/blogs', (req, res)=>{
 		var type = req.cookies['type'];
 		res.render('home/blogs',{ userlist:results , uname,type}); 
 	});
+})
+
+router.get('/reservation', (req, res)=>{
+	
+	//reservationModel.getAll(function(results){
+		var uname = req.cookies['uname'];
+		var type = req.cookies['type'];
+		res.render('home/reservation',{  uname,type}); 
+	//});
 })
 
 router.get('/invoice', (req, res)=>{

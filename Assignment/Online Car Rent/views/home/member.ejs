@@ -45,15 +45,11 @@
                             <h4 class="text-blue h4">Car List</h4>
 
                         </div>
-                        <% if(type == "Admin"){%>
+                        
                         <div class="pull-right">
-                            <a href="/home/cars/create">
-                                <button type="button" class="btn btn-primary">Add Car</button>
-                            </a>
+                         
                         </div>
-                        <%}else if(type == "Member"){ %>
-
-                        <% } %>
+                        
 
 
                     </div>
@@ -66,26 +62,31 @@
                         <thead>
                             <tr>
                                 <th class="table-plus datatable-nosort">Image</th>
-                                <th>Model Name</th>
-                                <th>Type</th>
+                                <th>Member Name</th>
+                                <th>Email</th>
+                                <th>Mobile</th>
+                                <th>Address</th>
+                                <th>Gender</th>
                                
-                                <th>Rent Price<small>(per day)</small></th>
+                               
 
                                 <th class="datatable-nosort">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             <% for(var i=0; i< userlist.length; i++ ){ %>
-                            <!-- <a href="/supAdmin_home/admin/edit/<%=userlist[i].id%>"> -->
+                           
                                 <tr>
                                     <td class="table-plus"><img class="card-image" src="<%= userlist[i].image %>"
                                             style="display: flex;height: 100px; width: 100px;"></img></td>
                                     <td>
                                         <a href="/home/cars/view/<%=userlist[i].id%>"><%= userlist[i].name %></a>
                                     </td>
-                                    <td><%= userlist[i].type %></td>
+                                    <td><%= userlist[i].email %></td>
                                     
-                                    <td><%= userlist[i].rentprice %></td>
+                                    <td><%= userlist[i].mobile %></td>
+                                    <td><%= userlist[i].address %></td>
+                                    <td><%= userlist[i].gender %></td>
                                  
 
                                     <td>
@@ -99,22 +100,18 @@
                                             <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
                                                 
 
-                                                <% if(type == "Admin"){%>
-                                                    <a class="dropdown-item" href="/home/cars/edit/<%=userlist[i].id%>" ><i class="icon-copy fa fa-edit" aria-hidden="true"></i></i> Update</a>
-
+                                                
+                                                    
                                                     <a class="dropdown-item" href="/home/cars/delete/<%=userlist[i].id%>"><i class="icon-copy fa fa-trash" aria-hidden="true"></i> Delete</a>
 
-                                                    <%}else if(type == "Member"){ %>
-                                                        <a class="dropdown-item" href="/home/cars/view/<%=userlist[i].id%>"><i class="dw dw-eye"></i> View</a>
-
-                                                    <% } %>
+                                                    
                                             </div>
                                         </div>
 
                                     </td>
 
                                 </tr>
-                            <!-- </a> -->
+                           
                             <% } %>
 
                         </tbody>
