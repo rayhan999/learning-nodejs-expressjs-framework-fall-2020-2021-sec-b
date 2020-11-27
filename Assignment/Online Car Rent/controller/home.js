@@ -136,7 +136,14 @@ router.get('/reservation', (req, res)=>{
 	//});
 })
 
-
+router.get('/rentalhistory', (req, res)=>{
+	
+	rentalModel.getAll(function(results){
+		var uname = req.cookies['uname'];
+		var type = req.cookies['type'];
+		res.render('home/rentalhistory',{ userlist:results , uname,type}); 
+	});
+})
 
 
 module.exports = router;
