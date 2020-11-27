@@ -90,6 +90,7 @@ router.get('/view/:id', (req, res) => {
     carModel.getById(req.params.id, function (result) {
 
         var car = {
+            id:result.id,
             model: result.name,
             rentprice: result.rentprice,
             description: result.description,
