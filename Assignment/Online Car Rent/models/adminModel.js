@@ -24,12 +24,29 @@ module.exports ={
 			}
 		});
 	},
+	getByUname: function(uname, callback){
+		var sql = "select * from admin where username='"+uname+"'";
+		console.log(sql);
+		db.getResults(sql, function(results){
+			if(results.length >0 ){
+				callback(results[0]);
+			}
+		});
+	},
 	getAll: function(callback){
 		var sql = "select * from admin";
 		db.getResults(sql, function(results){
 			callback(results);
 		});
 
+	},
+	getprofile: function(uname, callback){
+		var sql = "select * from admin where username='"+uname+"'";
+		db.getResults(sql, function(results){
+			if(results.length >0 ){
+				callback(results[0]);
+			}
+		});
 	},
 	insert: function(user, callback){
 		var sql = "insert into admin VALUES ('', '"+user.username+"' , '"+user.name+"' , '"+user.email+"', '"+user.mobile+"', '"+user.address+"', '"+user.image+"'   )";

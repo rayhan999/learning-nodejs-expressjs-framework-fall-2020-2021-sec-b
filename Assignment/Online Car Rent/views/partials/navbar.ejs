@@ -29,7 +29,12 @@
                     <span class="user-name"><%=uname%></span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                    <a class="dropdown-item" href="/accountingSellsHome/profile"><i class="dw dw-user1"></i> Profile</a>
+                   
+                    <% if(type == "Admin") { %>
+                        <a class="dropdown-item" href="/home/adminprofile/<%=uname%>"><i class="dw dw-user1"></i> Profile</a>
+                    <% } else{ %>
+                        <a class="dropdown-item" href="/home/memberprofile/<%=uname%>"><i class="dw dw-user1"></i> Profile</a>
+                    <% } %>
                     <a class="dropdown-item" href="/logout"><i class="dw dw-logout"></i> Log Out</a>
                 </div>
             </div>

@@ -66,6 +66,38 @@ router.get('/blogs', (req, res)=>{
 	});
 })
 
+router.get('/adminprofile/:uname', (req, res)=>{
+	var uname = req.cookies['uname'];
+		var type = req.cookies['type'];
+	adminModel.getByUname(req.params.uname,function(result){
+		var profile = {
+			username:result.username,
+			name:result.name,
+			email:result.email,
+			mobile:result.mobile,
+			address:result.address,
+			image:result.image
+		};
+			res.render('home/profile', {profile,uname,type});
+	});
+});
+router.get('/adminprofile', (req, res)=>{
+	var uname = req.cookies['uname'];
+		var type = req.cookies['type'];
+	adminModel.getprofile(uname,function(results){
+		
+		res.render('home/profile',{ userlist:results , uname,type}); 
+	});
+})
+router.get('/memberprofile', (req, res)=>{
+	
+	adminModel.getAll(function(results){
+		var uname = req.cookies['uname'];
+		var type = req.cookies['type'];
+		res.render('home/profile',{ userlist:results , uname,type}); 
+	});
+})
+
 router.get('/reservation', (req, res)=>{
 	
 	//reservationModel.getAll(function(results){
