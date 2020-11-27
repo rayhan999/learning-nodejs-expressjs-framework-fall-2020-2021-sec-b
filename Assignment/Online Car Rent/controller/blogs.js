@@ -192,18 +192,18 @@ router.get('/delete/:id', (req, res) => {
     var uname = req.cookies['uname'];
     var type = req.cookies['type'];
 
-    carModel.getById(req.params.id, function (result) {
+    blogModel.getById(req.params.id, function (result) {
 
         var car = {
-            model: result.name,
-            rentprice: result.rentprice,
-            description: result.description,
-            type: result.type,
-            customRadio: result.isFeatured,
-            image: result.image
+            title:result.title,
+            date:result.date,
+            created_by:result.created_by,
+            description:result.description,
+            image:result.image
+
         };
         console.log(car);
-        res.render('cars/delete', { car, uname, type });
+        res.render('blogs/delete', { car, uname, type });
     });
 
 })
@@ -213,11 +213,11 @@ router.post('/delete/:id', (req, res) => {
     var type = req.cookies['type'];
     
             // res.redirect('/supAdmin_home/admin');
-            carModel.delete(req.params.id, function (status) {
+            blogModel.delete(req.params.id, function (status) {
                 if (status) {
-                    res.redirect("/home/cars");
+                    res.redirect("/home/blogs");
                 } else {
-                    res.render('cars/edit', {  uname, type });
+                    res.render('blogs/delete', {  uname, type });
                 }
             });
        
