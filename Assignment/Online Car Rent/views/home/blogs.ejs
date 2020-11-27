@@ -55,78 +55,70 @@
                     </div>
 
                 </div>
+                <hr class="my-4">
 
-                <div class="pb-20">
-
-                    <table class="table hover data-table  nowrap ">
-                        <thead>
-                            <tr>
-                                <th class="table-plus datatable-nosort">Image</th>
-                                <th>Title</th>
-                                <th>Date</th>
-
-                                <th>Created By</th>
-                                <th class="datatable-nosort">Action</th>
-                                <th>Description</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <% for(var i=0; i< userlist.length; i++ ){ %>
-
-                            <tr>
-                                <td class="table-plus"><img class="card-image" src="<%= userlist[i].image %>"
-                                        style="display: flex;height: 100px; width: 100px;"></img></td>
-                                <td>
-                                    <%= userlist[i].title %>
-                                </td>
-                                <td><%= userlist[i].date %></td>
-                                <td><%= userlist[i].created_by %></td>
-
-
-
-                                <td>
-
-
-                                    <div class="dropdown">
-                                        <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"
-                                            href="#" role="button" data-toggle="dropdown">
-                                            <i class="dw dw-more"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-
-                                            <% if(type == "Admin"){%>
-                                                
-                                            <a class="dropdown-item" href="/home/blogs/delete/<%=userlist[i].id%>"><i
-                                                    class="dw dw-eye"></i> Delete</a>
-                                           
-                                            <a class="dropdown-item" href="/home/blogs/view/<%=userlist[i].id%>"><i
-                                                    class="dw dw-eye"></i> View</a>
-                                            <% }else{ %>
-                                            <% if(uname == userlist[i].created_by){%>
-                                            <a class="dropdown-item" href="/home/blogd/edit/<%=userlist[i].id%>"><i
-                                                    class="dw dw-eye"></i> Edit</a>
-                                            <a class="dropdown-item" href="/home/blogs/delete/<%=userlist[i].id%>"><i
-                                                    class="dw dw-eye"></i> Delete</a>
-                                            <% }else{%>
-                                            <a class="dropdown-item" href="/home/blogs/view/<%=userlist[i].id%>"><i
-                                                    class="dw dw-eye"></i> View</a>
-                                            <% } %>
-                                            <% } %>
+                <!--Carousel Wrapper-->
+                <div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
+        
+                    <!--Controls-->
+                    <div class="controls-top">
+                        <a class="btn-floating" href="#multi-item-example" data-slide="prev"><i
+                                class="fa fa-chevron-left"></i></a>
+                        <a class="btn-floating" href="#multi-item-example" data-slide="next"><i
+                                class="fa fa-chevron-right"></i></a>
+                    </div>
+                    <!--/.Controls-->
+        
+                    <!--Indicators-->
+                    <ol class="carousel-indicators">
+                        <li data-target="#multi-item-example" data-slide-to="0" class="active"></li>
+                        <li data-target="#multi-item-example" data-slide-to="1"></li>
+                        <li data-target="#multi-item-example" data-slide-to="2"></li>
+                    </ol>
+                    <!--/.Indicators-->
+        
+                    <!--Slides-->
+                    <% for(var i=0; i< userlist.length; i++ ){ %>
+                    <div class="carousel-inner" role="listbox">
+        
+                        <!--First slide-->
+                        <div class="carousel-item active">
+        
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="card mb-2">
+                                        <img class="card-img-top"
+                                            src="<%= userlist[i].image %>"
+                                            alt="Card image cap">
+                                        <div class="card-body">
+                                            <h4 class="card-title"><%= userlist[i].title %></h4>
+                                            <p class="card-text"><%= userlist[i].description %></p>
+                                            
                                         </div>
                                     </div>
-                                    <td><%= userlist[i].description %></td>
-
-                                </td>
-
-                            </tr>
-
-                            <% } %>
-
-                        </tbody>
-                    </table>
-
+                                </div>
+        
+        
+                            </div>
+        
+                        </div>
+                        <!--/.Third slide-->
+        
+                    </div>
+                    <% } %>
+                    <!--/.Slides-->
+        
                 </div>
+                <!--/.Carousel Wrapper-->
+                
             </div>
         </div>
     </div>
 </div>
+
+
+
+
+
+
+

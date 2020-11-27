@@ -11,18 +11,17 @@ const router 	= express.Router();
 
 router.get('/', (req, res)=>{
 	
-	/* if(req.cookies['uname'] != null){
-		res.render('home/index');
-	}else{
-		res.redirect('/login');
-	} */
-
-	console.log(req.cookies['uname']);
-	console.log(req.cookies['type']);
-	var uname = req.cookies['uname'];
-	var type = req.cookies['type'];
-	//console.log(uname);
-	res.render('home/index',{uname,type});
+	// if(req.cookies['uname'] != null){
+	// 	res.render('home/index');
+	// }else{
+	// 	res.redirect('/login');
+	// } 
+	carModel.getAll(function(results){
+		var uname = req.cookies['uname'];
+		var type = req.cookies['type'];
+		res.render('home/index',{ userlist:results , uname,type}); 
+	});
+	
 })
 router.get('/admin', (req, res)=>{
 	
