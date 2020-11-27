@@ -21,7 +21,7 @@ $(document).ready(function(){
        
 
 		$.ajax({
-			url: '/supAdmin_home/supAdmin/uname',
+			url: '/home/admin/uname',
 			method: 'post',
 			datatype : 'json',
 			data : {'search':username},

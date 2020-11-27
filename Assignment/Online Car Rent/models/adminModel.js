@@ -32,7 +32,7 @@ module.exports ={
 
 	},
 	insert: function(user, callback){
-		var sql = "insert into cars VALUES ('', '"+user.model+"' , '"+user.description+"' , '"+user.rentprice+"', '"+user.type+"', '"+user.caustomRadio+"', '"+user.image+"'   )";
+		var sql = "insert into admin VALUES ('', '"+user.username+"' , '"+user.name+"' , '"+user.email+"', '"+user.mobile+"', '"+user.address+"', '"+user.image+"'   )";
 		
 		console.log(sql);
 
@@ -53,6 +53,17 @@ module.exports ={
 		console.log(sql);
 		db.execute(sql,function(status){
 			callback(status);
+		});
+    },
+    search: function(user, callback){
+        var sql = "SELECT username FROM user WHERE username = '"+user.search+"'";
+
+		db.getResults(sql, function(results){
+			if(results.length > 0){
+				callback(results[0]);
+			}else{
+				callback(false);
+			}
 		});
 	}
 }

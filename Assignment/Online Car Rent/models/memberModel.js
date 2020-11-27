@@ -32,11 +32,12 @@ module.exports ={
 
 	},
 	insert: function(user, callback){
-		var sql = "insert into cars VALUES ('', '"+user.model+"' , '"+user.description+"' , '"+user.rentprice+"', '"+user.type+"', '"+user.caustomRadio+"', '"+user.image+"'   )";
+		var sql = "insert into member VALUES ('', '"+user.username+"' , '' , '', '', '', '', '' )";
 		
 		console.log(sql);
 
 		db.execute(sql, function(status){
+			console.log("exeute done");
 			callback(status);
 		});
 	},

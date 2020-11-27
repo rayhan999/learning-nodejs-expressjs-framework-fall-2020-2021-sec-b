@@ -12,6 +12,7 @@ const expfileupload			= require('express-fileupload');
 const pdf 					= require('html-pdf');
 // const pdfDocument     		= require('pdfkit');
 // const user					= require('./controller/user');
+const register					= require('./controller/register');
 const login					= require('./controller/login');
  const home					= require('./controller/home');
  const cars					= require('./controller/cars');
@@ -59,6 +60,7 @@ app.use(expfileupload());
 // });
 
 // app.use('/user', user);
+app.use('/registration', register);
  app.use('/login', login);
 // app.use('/logout', logout);
 // app.use('/getstarted',registration);
