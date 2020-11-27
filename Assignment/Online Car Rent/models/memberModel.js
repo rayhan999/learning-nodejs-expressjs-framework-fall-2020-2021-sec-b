@@ -17,7 +17,7 @@ module.exports ={
 		});
 	},
 	getById: function(id, callback){
-		var sql = "select * from cars where id='"+id+"'";
+		var sql = "select * from member where id='"+id+"'";
 		db.getResults(sql, function(results){
 			if(results.length >0 ){
 				callback(results[0]);
@@ -49,7 +49,7 @@ module.exports ={
 
 	},
 	delete: function(id, callback){
-		var sql = "DELETE FROM cars WHERE id = '"+id+"'";
+		var sql = "DELETE FROM member WHERE id = '"+id+"'";
 		console.log(sql);
 		db.execute(sql,function(status){
 			callback(status);
