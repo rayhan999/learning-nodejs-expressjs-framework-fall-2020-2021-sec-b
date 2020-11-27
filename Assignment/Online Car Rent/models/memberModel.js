@@ -24,6 +24,15 @@ module.exports ={
 			}
 		});
 	},
+	getByUname: function(uname, callback){
+		var sql = "select * from member where username='"+uname+"'";
+		console.log(sql);
+		db.getResults(sql, function(results){
+			if(results.length >0 ){
+				callback(results[0]);
+			}
+		});
+	},
 	getAll: function(callback){
 		var sql = "select * from member";
 		db.getResults(sql, function(results){

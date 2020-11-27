@@ -81,23 +81,53 @@ router.get('/adminprofile/:uname', (req, res)=>{
 			res.render('home/profile', {profile,uname,type});
 	});
 });
-router.get('/adminprofile', (req, res)=>{
+router.get('/memberprofile/:uname', (req, res)=>{
 	var uname = req.cookies['uname'];
 		var type = req.cookies['type'];
-	adminModel.getprofile(uname,function(results){
-		
-		res.render('home/profile',{ userlist:results , uname,type}); 
-	});
-})
-router.get('/memberprofile', (req, res)=>{
-	
-	adminModel.getAll(function(results){
-		var uname = req.cookies['uname'];
-		var type = req.cookies['type'];
-		res.render('home/profile',{ userlist:results , uname,type}); 
-	});
-})
+	memberModel.getByUname(req.params.uname,function(result){
+		var profile = {
+			username:result.username,
+			name:result.name,
+			email:result.email,
+			mobile:result.mobile,
+			address:result.address,
 
+			image:result.image
+		};
+			res.render('home/profile', {profile,uname,type});
+	});
+});
+router.get('/adminprofileedit/:uname', (req, res)=>{
+	var uname = req.cookies['uname'];
+		var type = req.cookies['type'];
+	adminModel.getByUname(req.params.uname,function(result){
+		var profile = {
+			username:result.username,
+			name:result.name,
+			email:result.email,
+			mobile:result.mobile,
+			address:result.address,
+			image:result.image
+		};
+			res.render('home/profileedit', {profile,uname,type});
+	});
+});
+router.get('/memberprofileedit/:uname', (req, res)=>{
+	var uname = req.cookies['uname'];
+		var type = req.cookies['type'];
+	memberModel.getByUname(req.params.uname,function(result){
+		var profile = {
+			username:result.username,
+			name:result.name,
+			email:result.email,
+			mobile:result.mobile,
+			address:result.address,
+
+			image:result.image
+		};
+			res.render('home/profile', {profile,uname,type});
+	});
+});
 router.get('/reservation', (req, res)=>{
 	
 	//reservationModel.getAll(function(results){
@@ -107,25 +137,7 @@ router.get('/reservation', (req, res)=>{
 	//});
 })
 
-router.get('/invoice', (req, res)=>{
-	res.render('home/invoice'); 
-})
 
-router.get('/Subscriber', (req, res)=>{
-	res.render('home/Subscriber'); 
-})
-
-router.get('/supAdmin', (req, res)=>{
-	res.render('home/supAdmin'); 
-})
-
-router.get('/admin', (req, res)=>{
-	res.render('home/admin'); 
-})
-
-router.get('/ab', (req, res)=>{
-	res.render('home/ab'); 
-});
 
 
 module.exports = router;

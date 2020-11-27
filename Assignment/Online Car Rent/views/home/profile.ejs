@@ -73,10 +73,14 @@
                         <div class="pd-20 card-box height-100-p">
                             <div class="btn-list" style="float: right;">
                                 <!-- <button type="button" class="btn btn-outline-dark">Reset</button> -->
-                                <a href="/home/reservation" class="btn btn-outline-warning"><i
-                                        class="icon-copy dw dw-calendar-5"></i> Rent</a>
+                               
 
-
+                                        <% if(type == "Admin"){%>
+                                            <a href="/home/adminprofileedit/<%= profile.username %>" class="btn btn-outline-warning"><i class="icon-copy dw dw-calendar-5"></i> Edit Profile</a>
+                                            <%}else if(type == "Member"){ %>
+                                                <a href="/home/memberprofileedit/<%= profile.username %>" class="btn btn-outline-warning"><i class="icon-copy dw dw-calendar-5"></i> Edit Profile</a>
+                                            <% } %>
+                                            
 
 
 
