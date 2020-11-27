@@ -49,13 +49,21 @@
 								<div class="card-body">
 									<h4 class="card-title"><%= userlist[i].name %></h4>
 									<p class="card-text"><%= userlist[i].description %></p>
-									
+									<% if(type == "Admin"){%>
+										<a class="btn btn-warning" href="/home/cars/edit/<%=userlist[i].id%>" ><i class="icon-copy fa fa-edit" aria-hidden="true"></i></i> Update</a>
+
+										<a class="btn btn-danger" href="/home/cars/delete/<%=userlist[i].id%>"><i class="icon-copy fa fa-trash" aria-hidden="true"></i> Delete</a>
+
+										<%}else if(type == "Member"){ %>
+											<a class="btn btn-info" href="/home/cars/view/<%=userlist[i].id%>"><i class="dw dw-eye"></i> View</a>
+
+										<% } %>
 								</div>
 							</div>
 						</div>
 
 
-					</div>
+					</div></br>
 
 				</div>
 				<!--/.Third slide-->
